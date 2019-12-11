@@ -1,0 +1,187 @@
+@font-face
+{
+	font-family: Righteous;
+	src: url("fonts/Righteous-Regular.ttf");
+}
+
+@font-face
+{
+	font-family: Courrier;
+	src: url("fonts/cour.ttf");
+}
+
+.fa, .fab, .fas
+{
+	font-size: 40px;
+}
+
+body
+{
+	margin: auto;
+	background-image: url(pictures/background.png);
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+}
+
+body *
+{
+	color: #dddddd;
+	text-align: center;
+}
+
+p
+{
+	text-align: justify;
+}
+
+section
+{
+	z-index: 2;
+}
+
+#title
+{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	font-family: Courrier;
+	height: 100px;
+}
+
+em, #menu
+{
+	font-family: Courrier !important;
+	font-style: normal !important;
+	text-align: center;
+	font-size: 1.5em;
+	transition: letter-spacing 0.25s;
+}
+
+nav ul
+{
+	display: flex;
+	justify-content: space-between;
+	padding: 0 0;
+	margin: auto;
+	height: 100%;
+
+}
+
+nav li
+{
+	list-style-type: none;
+	text-align: center;
+	flex-grow: 1;
+	padding: 10px;
+	transition: padding 0.25s, background 0.5s;
+	background: #1b5774;
+}
+
+nav a
+{
+	width: 100%;
+	font-weight: bold;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	transition: color 0.5s;
+}
+
+nav li:hover
+{
+	padding-right: 30px;
+	padding-left: 30px;
+	background: #dddddd;
+}
+
+
+nav li:hover > a
+{
+	color: #1b5774;
+}
+
+#overall
+{
+	width: 80%;
+	margin: auto;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	
+}
+
+#textbox
+{
+	display: flex;
+	flex-direction: column;
+	background: rgba(27, 87, 116, 0.6) !important;
+	font-size: 1.3em !important;
+	width: 400px ;
+	margin: auto;
+	font-family: Courrier;
+	font-weight: bold;
+	letter-spacing: -2px;
+	text-align: justify;
+}
+
+.inner
+{
+	padding: 20px;
+	margin: 0;
+}
+
+ .form-control, #submit, ::placeholder
+ {
+ 	font-family: Courrier;
+	font-size: 1em;
+	font-weight: bold;
+	padding: 6px;
+ 	width: 80%;
+ 	background: #1b5774;
+ 	border: none;
+ 	color: #dddddd;
+ }
+ 
+ #submit, #textButton
+ {
+ 	font-family: Courrier;
+	font-size: 2em;
+ 	background: none;
+ 	border: none;
+ 	width: auto;
+ 	justify-self: center;
+ 	transition: background 0.5s;
+ }
+ 
+#textButton:hover
+{
+	background: #1b5774 !important;
+}
+ 
+@media all and (max-width: 640px)
+{
+	#menu ul
+	{
+		flex-wrap: wrap;
+	}
+
+	#textbox, #overall
+	{
+		width: 100% !important;
+	}
+
+	header
+	{
+		margin: auto;
+		width: 75%;
+		font-size: 0.75em;
+	}
+
+	nav ul
+	{
+		display: flex;
+		justify-content: space-around;
+	}
+}
