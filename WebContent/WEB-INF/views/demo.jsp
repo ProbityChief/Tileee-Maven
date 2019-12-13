@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Tileee</title>
 		<script type="text/javascript" src="index.js"></script>
+		<script src="train.js" type="text/javascript"></script>
 		<style><%@include file="css/index.css" %></style>
 	</head>
 	<body style=";">
@@ -24,21 +25,18 @@
 	</section>
 
 	<div id="overall">
-		<article id="textbox">
 		        <div class="flippingcard">
             		<div class="card-single">
                 		<div class="face-front">
-                   			<p></p>
+                   			<p>mot</p>
                     		<input type="text" id="input" autocomplete="off">
                 		</div>
                 		<div class="face-back">
-                    		<p></p>
+                    		<p>word</p>
                 		</div>
             		</div>
-            		<button id="flip" class="fas fa-check-square fa-4x"></button>
+            		<button id="flip" class="fas fa-check-square fa-6x"></button>
         		</div>
-        		<script src="train.js" type="text/javascript"></script>
-			</article>
 		</div>
 		<footer><%@include file="footer.jsp"%></footer>
 	</body>

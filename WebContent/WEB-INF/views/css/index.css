@@ -86,6 +86,8 @@ nav li:hover>a {
 	margin: auto;
 	margin-top: 25px;
 	margin-bottom: 25px;
+	display: flex;
+	justify-content: center;
 }
 
 #textbox {
@@ -134,16 +136,16 @@ nav li:hover>a {
 .flippingcard {
 	display: flex;
 	flex-direction: column;
-	width: 400px;
+	width: 700px;
 	color: white;
 	user-select: none;
 }
 
 div[class^="card"] {
-	height: 250px;
+	height: 400px;
 	perspective-origin: center bottom;
 	position: relative;
-	font-size: 3em;
+	font-size: 5em;
 	text-shadow: 0 0 3px snow;
 }
 
@@ -168,7 +170,7 @@ div[class^="card"] [class^="face"] {
 }
 
 div[class^="card"] .face-front {
-	background: grey;
+	background: rgba(100, 100, 100, 0.75);
 	z-index: 5;
 }
 

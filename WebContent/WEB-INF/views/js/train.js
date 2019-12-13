@@ -3,7 +3,7 @@ let score = 0;
 let mot = ["mot", "voiture"];
 let traduction = ["word", "car"];
 let toIndex = () => {window.location.replace('/')};
-let toTrain = () => {window.location.replace('train.html')};
+let toTrain = () => {window.location.replace('/Demo')};
 
 function searchKeyPress(e) {
     e = e || window.event;
@@ -28,9 +28,9 @@ function checkResponse() {
         }
         if (elements[i].className == "card-single") {
             elements[i].className += " rotated";
-            check.className = "fas fa-arrow-right fa-4x";
+            check.className = "fas fa-arrow-right fa-6x";
         } else {
-            check.className = "fas fa-check-square fa-4x";
+            check.className = "fas fa-check-square fa-6x";
             elements[i].className = "card-single";
             if (index < traduction.length - 1) {
                 index++;
@@ -39,7 +39,7 @@ function checkResponse() {
                 input.focus();
             } else {
                 input.remove();
-                check.className = "fas fa-home fa-5x";
+                check.className = "fas fa-home fa-6x";
                 let result = (score / traduction.length) * 100;
                 let color = result > 90 ? "rgba(25,150,50,1)" : (result > 50 ? "rgba(25,150,175,1)" : "rgba(175,50,25,1)");
                 document.querySelector('.face-front').style = `font-size: 2em; background: ${color};`;
