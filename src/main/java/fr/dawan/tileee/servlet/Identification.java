@@ -77,10 +77,11 @@ public class Identification extends HttpServlet {
 				try {
 					connection = ConnectionDB.getConnection();
 					String rand = UserDao.hash(user.getName() + "_" + user.getMail());
+					user.setRand(rand);
 					UserDao.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
 							"Votre compte sur Tileee",
 							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getName()
-									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/Tileee/Identification?action=activateUser&rand="
+									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/Tileee/FinalisationInscription?rand="
 									+ rand
 									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
 							null, null, null);

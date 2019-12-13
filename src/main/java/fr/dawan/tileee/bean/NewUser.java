@@ -4,6 +4,7 @@ public class NewUser {
 	private String name;
 	private String mail;
 	private String password;
+	private String rand;
     private boolean validation;
 
 	public NewUser(String name, String mail, String password) {
@@ -11,7 +12,16 @@ public class NewUser {
 		this.name = name;
 		this.mail = mail;
 		this.password = password;
+		this.rand = null;
 		this.validation = false;
+	}
+	
+	public String getRand() {
+		return rand;
+	}
+	
+	public void setRand(String rand) {
+		this.rand = rand;
 	}
 	
 	public Boolean getValidation() {

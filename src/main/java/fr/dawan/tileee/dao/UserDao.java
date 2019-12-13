@@ -181,7 +181,7 @@ public class UserDao {
 
 		return list;
 	}
-
+	
 	public static NewUser findByName(String name, Connection cnx, boolean closeCnx) throws Exception {
 		NewUser u = new NewUser();
 		PreparedStatement stmt = cnx.prepareStatement("SELECT * FROM users WHERE name = ?");
@@ -198,6 +198,25 @@ public class UserDao {
 		if (closeCnx)
 			cnx.close();
 
+		return u;
+	}
+	
+	public static NewUser findByRand(String rand, Connection cnx, boolean closeCnx) throws Exception {
+		NewUser u = new NewUser();
+		PreparedStatement stmt = cnx.prepareStatement("SELECT * FROM users WHERE hashcode = ?");
+		stmt.setString(1, rand);
+		ResultSet rs = stmt.executeQuery();
+		
+		if (rs.next()) {
+			u.setName(rs.getString("name"));
+			u.setMail(rs.getString("mail"));
+			u.setPassword(rs.getString("pass"));
+			u.setValidation(rs.getBoolean("validation"));
+		}
+		rs.close();
+		if (closeCnx)
+			cnx.close();
+		
 		return u;
 	}
 
@@ -225,13 +244,14 @@ public class UserDao {
 		String date = sdf.format(now);
 		password = hashPassword(password);
 		PreparedStatement stmt = cnx.prepareStatement(
-				"INSERT INTO users (name, pass, mail, dateinscription, validation) "
-				+ "VALUES(?,?,?,?,?)");
+				"INSERT INTO users (name, pass, mail, dateinscription, validation, hashcode) "
+				+ "VALUES(?,?,?,?,?,?)");
 		stmt.setString(1, user.getName().trim());
 		stmt.setString(2, password);
 		stmt.setString(3, user.getMail().trim());
 		stmt.setString(4, date);
 		stmt.setBoolean(5, false);
+		stmt.setString(6, user.getRand());
 		int resultSet = stmt.executeUpdate();
 		if (willConnectionClosed)
 			cnx.close();
@@ -259,7 +279,7 @@ public class UserDao {
 	}
 
 	public static int update(NewUser user, Connection connection, Boolean willBeClosed) throws Exception {
-		PreparedStatement ps = connection.prepareStatement("UPDATE utilisateur SET validation=? WHERE login=?");
+		PreparedStatement ps = connection.prepareStatement("UPDATE utilisateur SET validation=? WHERE name=?");
 		ps.setBoolean(1, true);
 		ps.setString(2, user.getName());
 		int resultSet = ps.executeUpdate();
