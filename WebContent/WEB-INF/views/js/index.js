@@ -1,13 +1,11 @@
 function floutter() {
 	document.querySelector('overall').style.filter='blur(3px)';
-	document.querySelector('footer').style.filter='blur(3px)';
-    return;
+	document.getElementsByTagName('footer').style.filter='blur(3px)';
 }
 
 function defloutter() {
 	document.querySelector('overall').style.filter='none';
-	document.querySelector('footer').style.filter='none';
-    return;
+	document.getElementsByTagName('footer').style.filter='none';
 }
 
 window.onload(document.querySelector(".fa-power-off").addEventListener()) 

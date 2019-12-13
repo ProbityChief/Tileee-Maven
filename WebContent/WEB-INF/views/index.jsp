@@ -33,9 +33,9 @@
 			évaluer votre maitrise du vocabulaire, améliorer votre compréhension orale et constater vos progrès 
 			à n'importe quel moment!
 			</p>
-			<button id="textButton" style="background: rgba(27, 87, 116, 0.2);">DEMO</button>
+			<a id="textButton" style="background: rgba(27, 87, 116, 0.2);" href="Demo">DEMO</a>
 		</article>
 	</div>
-	<%@include file="footer.jsp" %>
+	<footer><%@include file="footer.jsp"%></footer>
 </body>
 </html>
