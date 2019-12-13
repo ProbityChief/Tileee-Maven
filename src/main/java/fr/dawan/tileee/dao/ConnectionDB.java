@@ -10,7 +10,7 @@ public class ConnectionDB {
 	        Connection connection = null;
 	        try {
 	            Properties p = new Properties();
-	            p.load( Thread.currentThread().getContextClassLoader().getResourceAsStream("resources/application.properties") );
+	            p.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties"));
 	        	Class.forName( p.getProperty("driver") );
 	            connection = DriverManager.getConnection(
 	            		p.getProperty( "url" ) , 
@@ -19,11 +19,11 @@ public class ConnectionDB {
 	            );
 	            return connection;
 	        } catch (ClassNotFoundException e) {
-	            System.out.println("Driver JBDC non trouvï¿½");
+	            System.out.println("Driver JBDC non trouvé");
 	            e.printStackTrace();
 	            return null;
 	        } catch (Exception e) {
-	            System.out.println("Problï¿½me de connexion ï¿½ la base de donnï¿½es");
+	            System.out.println("Problème de connexion à la base de données");
 	            e.printStackTrace();
 	            return null;
 	        }
