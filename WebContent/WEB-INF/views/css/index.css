@@ -1,22 +1,12 @@
-@font-face
-{
-	font-family: Righteous;
-	src: url("fonts/Righteous-Regular.ttf");
-}
-
-@font-face
-{
-	font-family: Courrier;
-	src: url("fonts/cour.ttf");
-}
-
-.fa, .fab, .fas
-{
+.fa, .fab, .fas {
 	font-size: 40px;
 }
 
-body
-{
+a {
+	text-decoration: none;
+}
+
+body {
 	margin: auto;
 	background-image: url(pictures/background.png);
 	background-size: cover;
@@ -24,52 +14,44 @@ body
 	flex-direction: column;
 }
 
-body *
-{
+body * {
 	color: #dddddd;
 	text-align: center;
 }
 
-p
-{
+p {
 	text-align: justify;
 }
 
-section
-{
+section {
 	z-index: 2;
 }
 
-#title
-{
+#title {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	font-family: Courrier;
+	font-family: 'Roboto';
 	height: 100px;
 }
 
-em, #menu
-{
-	font-family: Courrier !important;
+em, #menu {
+	font-family: 'Roboto' !important;
 	font-style: normal !important;
 	text-align: center;
 	font-size: 1.5em;
 	transition: letter-spacing 0.25s;
 }
 
-nav ul
-{
+nav ul {
 	display: flex;
 	justify-content: space-between;
 	padding: 0 0;
 	margin: auto;
 	height: 100%;
-
 }
 
-nav li
-{
+nav li {
 	list-style-type: none;
 	text-align: center;
 	flex-grow: 1;
@@ -78,8 +60,7 @@ nav li
 	background: #1b5774;
 }
 
-nav a
-{
+nav a {
 	width: 100%;
 	font-weight: bold;
 	height: 100%;
@@ -90,97 +71,197 @@ nav a
 	transition: color 0.5s;
 }
 
-nav li:hover
-{
+nav li:hover {
 	padding-right: 30px;
 	padding-left: 30px;
 	background: #dddddd;
 }
 
-
-nav li:hover > a
-{
+nav li:hover>a {
 	color: #1b5774;
 }
 
-#overall
-{
+#overall {
 	width: 80%;
 	margin: auto;
 	margin-top: 25px;
 	margin-bottom: 25px;
-	
+	display: flex;
+	justify-content: center;
 }
 
-#textbox
-{
+#textbox {
 	display: flex;
 	flex-direction: column;
 	background: rgba(27, 87, 116, 0.6) !important;
 	font-size: 1.3em !important;
-	width: 400px ;
+	width: 400px;
 	margin: auto;
-	font-family: Courrier;
+	font-family: 'Roboto';
 	font-weight: bold;
 	letter-spacing: -2px;
 	text-align: justify;
 }
 
-.inner
-{
+.inner {
 	padding: 20px;
 	margin: 0;
 }
 
- .form-control, #submit, ::placeholder
- {
- 	font-family: Courrier;
+.form-control, #submit, ::placeholder {
+	font-family: 'Roboto';
 	font-size: 1em;
 	font-weight: bold;
 	padding: 6px;
- 	width: 80%;
- 	background: #1b5774;
- 	border: none;
- 	color: #dddddd;
- }
- 
- #submit, #textButton
- {
- 	font-family: Courrier;
+	width: 80%;
+	background: #1b5774;
+	border: none;
+	color: #dddddd;
+}
+
+#submit, #textButton {
+	font-family: 'Roboto';
 	font-size: 2em;
- 	background: none;
- 	border: none;
- 	width: auto;
- 	justify-self: center;
- 	transition: background 0.5s;
- }
- 
-#textButton:hover
-{
+	background: none;
+	border: none;
+	width: auto;
+	justify-self: center;
+	transition: background 0.5s;
+}
+
+#textButton:hover {
 	background: #1b5774 !important;
 }
- 
-@media all and (max-width: 640px)
-{
-	#menu ul
-	{
+
+.flippingcard {
+	display: flex;
+	flex-direction: column;
+	width: 700px;
+	color: white;
+	user-select: none;
+}
+
+div[class^="card"] {
+	height: 400px;
+	perspective-origin: center bottom;
+	position: relative;
+	font-size: 5em;
+	text-shadow: 0 0 3px snow;
+}
+
+div[class^="card"] [class^="face"] {
+	height: 100%;
+	width: 100%;
+	margin: auto;
+	position: absolute;
+	text-align: center;
+	left: 0;
+	top: 0;
+	backface-visibility: hidden;
+	transform-style: preserve-3d;
+	transition: all 0.25s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 12px;
+	box-shadow: 0 0 3px grey;
+	text-transform: capitalize;
+}
+
+div[class^="card"] .face-front {
+	background: rgba(100, 100, 100, 0.75);
+	z-index: 5;
+}
+
+div[class^="card"] .face-back {
+	z-index: 0;
+	transform: rotateX(-180deg);
+}
+
+div[class^="card"].rotated .face-front {
+	z-index: 5;
+	transform: rotateX(-180deg);
+}
+
+div[class^="card"].rotated .face-back {
+	z-index: 10;
+	transform: rotateX(0deg);
+}
+
+button {
+	display: block;
+	width: auto;
+	color: grey;
+	background: transparent;
+	flex-grow: 1;
+	text-shadow: 0 0 3px grey;
+	z-index: 10;
+	border: none;
+	cursor: pointer;
+	padding: 10px;
+	transition: all 0.5s ease-in-out;
+	transform: translate;
+}
+
+input {
+	color: grey;
+	font-size: 0.5em;
+	width: 80%;
+	text-align: center;
+	border: none;
+	border-radius: 6px;
+	padding: 6px;
+	box-shadow: inset 0 0 6px grey;
+	text-transform: inherit;
+}
+
+input:focus, button:focus {
+	outline: none;
+}
+
+#flip:hover, button:focus {
+	color: lightgrey;
+}
+
+.bg {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	height: 100%;
+	width: 100%;
+	filter: blur(1rem);
+	transition: all 1s ease-in-out;
+	background-attachment: fixed;
+}
+
+#time {
+	display: flex;
+	position: absolute;
+	bottom: -15px;
+	right: 20px;
+	z-index: 20;
+	text-shadow: 0 0 3px snow;
+	font-size: 2em;
+	font-weight: bold;
+	user-select: none;
+}
+
+@media all and (max-width: 640px) {
+	#menu ul {
 		flex-wrap: wrap;
 	}
-
-	#textbox, #overall
-	{
+	#textbox, #overall {
 		width: 100% !important;
 	}
-
-	header
-	{
+	header {
 		margin: auto;
 		width: 75%;
 		font-size: 0.75em;
 	}
-
-	nav ul
-	{
+	nav ul {
 		display: flex;
 		justify-content: space-around;
 	}
