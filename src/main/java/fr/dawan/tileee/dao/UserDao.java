@@ -279,7 +279,7 @@ public class UserDao {
 	}
 
 	public static int update(NewUser user, Connection connection, Boolean willBeClosed) throws Exception {
-		PreparedStatement ps = connection.prepareStatement("UPDATE utilisateur SET validation=? WHERE name=?");
+		PreparedStatement ps = connection.prepareStatement("UPDATE users SET validation=? WHERE name=?");
 		ps.setBoolean(1, true);
 		ps.setString(2, user.getName());
 		int resultSet = ps.executeUpdate();
