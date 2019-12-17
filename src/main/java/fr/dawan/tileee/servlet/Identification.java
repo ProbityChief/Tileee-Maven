@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.dawan.tileee.bean.NewUser;
+import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.ConnectionDB;
 import fr.dawan.tileee.dao.UserDao;
 import fr.dawan.tileee.validator.UserValidator;
@@ -49,7 +49,7 @@ public class Identification extends HttpServlet {
 		switch (request.getParameter("validation")) {
 		case "inscription":
 
-			NewUser user = new NewUser(name, email, password);
+			User user = new User(name, email, password);
 
 			String userValidator = UserValidator.userValidator(user, password1);
 
@@ -81,7 +81,7 @@ public class Identification extends HttpServlet {
 					UserDao.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
 							"Votre compte sur Tileee",
 							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getName()
-									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/Tileee/FinalisationInscription?rand="
+									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
 									+ rand
 									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
 							null, null, null);
@@ -97,7 +97,7 @@ public class Identification extends HttpServlet {
 			}
 			break;
 		case "login":
-			NewUser login = new NewUser(name, password);
+			User login = new User(name, password);
 			try {
 				login = UserDao.findByName(name, ConnectionDB.getConnection(), false);
 				userValidator = UserValidator.userValidator(email, password, login.getValidation());

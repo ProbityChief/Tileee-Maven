@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.dawan.tileee.bean.NewUser;
+import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.ConnectionDB;
 import fr.dawan.tileee.dao.UserDao;
 
@@ -41,7 +41,7 @@ public class FinalisationInscription extends HttpServlet {
     	
     	try {
     	cnx = ConnectionDB.getConnection();
-    	NewUser utilisateur = UserDao.findByRand(rand, cnx , false);
+    	User utilisateur = UserDao.findByRand(rand, cnx , false);
 
         if(utilisateur.getValidation() == false){
                 System.out.println(utilisateur.getMail() + " " + utilisateur.getName());

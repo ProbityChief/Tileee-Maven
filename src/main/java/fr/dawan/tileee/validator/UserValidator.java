@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import fr.dawan.tileee.dao.ConnectionDB;
 import fr.dawan.tileee.dao.UserDao;
-import fr.dawan.tileee.bean.NewUser;
+import fr.dawan.tileee.bean.User;
 
 public class UserValidator {
 
@@ -53,7 +53,7 @@ public class UserValidator {
         return message;
     }
 
-    public static String userValidator(NewUser user, String passwordConfirmation){
+    public static String userValidator(User user, String passwordConfirmation){
         String message = "";
         if(user.getName().isEmpty())
             message += "forename";

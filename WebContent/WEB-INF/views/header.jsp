@@ -16,6 +16,8 @@
 			<ul>
 				<li><a class="fa fa-layer-group" href="Entrainement"></a></li>
 				<li><a class="fa fa-tag" href="CreationStacks"></a></li>
+				<li><a class="fa fa-user-friends" href="Invitation"></a></li>
+				<li><a href="Invitation"><img src="pictures/Groupe2.svg"></a></li>
 				<li><a class="fa fa-cog" href="Parametres"></a></li>
 				<li><a class="fa fa-power-off" href="<%= request.getScheme() + "://"
 													+ request.getServerName() + ":"
