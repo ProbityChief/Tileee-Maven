@@ -28,7 +28,6 @@
 				Vous n'avez actuellement entré aucune stack de carte
 			</c:otherwise>
 			</c:choose>
-			</article>
 	</div>
 <%@include file="footer.jsp" %>
 </body>

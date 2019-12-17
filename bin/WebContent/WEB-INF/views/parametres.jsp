@@ -36,12 +36,6 @@
 					<td><input type="submit" value="Modifier le thème">
 						</form></td>
 				</tr>
-				<tr>
-					<td colspan="2">
-						<form method="post" action="Parametres?action=supprimercompte">
-  <input type="checkbox" name="supprimer"><label for="scales">Supprimer le compte (attention, une fois coché, il vous sera impossible de revenir en arrière)</label>
-	</form>
-				</tr>
 			</table>
 		</article>
 	</div>

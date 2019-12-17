@@ -1,68 +1,57 @@
 package fr.dawan.tileee.bean;
 
-public class Card {
-	private String motATraduire;
-	private String motTraduit;
-	private String langueInitiale;
-	private String langueTraduite;
-	private String tag1;
-	private String tag2;
-	private String tag3;
-	private String tag4;
-	private String tag5;
+import javax.persistence.Id;
+
+public class Card extends DbObject{
+	@Id
+	private long card_id;
+	private long user_id;
+	private String word;
+	private String translation;
+	private String starting_language;
+	private String ending_language;
+	private double value;
 	
-	public String getMotATraduire() {
-		return motATraduire;
+	public long getCard_id() {
+		return card_id;
 	}
-	public void setMotATraduire(String motATraduire) {
-		this.motATraduire = motATraduire;
+	public void setCard_id(long card_id) {
+		this.card_id = card_id;
 	}
-	public String getMotTraduit() {
-		return motTraduit;
+	public long getUser_id() {
+		return user_id;
 	}
-	public void setMotTraduit(String motTraduit) {
-		this.motTraduit = motTraduit;
+	public void setUser_id(long user_id) {
+		this.user_id = user_id;
 	}
-	public String getLangueInitiale() {
-		return langueInitiale;
+	public String getWord() {
+		return word;
 	}
-	public void setLangueInitiale(String langueInitiale) {
-		this.langueInitiale = langueInitiale;
+	public void setWord(String word) {
+		this.word = word;
 	}
-	public String getLangueTraduite() {
-		return langueTraduite;
+	public String getTranslation() {
+		return translation;
 	}
-	public void setLangueTraduite(String langueTraduite) {
-		this.langueTraduite = langueTraduite;
+	public void setTranslation(String translation) {
+		this.translation = translation;
 	}
-	public String getTag1() {
-		return tag1;
+	public String getStarting_language() {
+		return starting_language;
 	}
-	public void setTag1(String tag1) {
-		this.tag1 = tag1;
+	public void setStarting_language(String starting_language) {
+		this.starting_language = starting_language;
 	}
-	public String getTag2() {
-		return tag2;
+	public String getEnding_language() {
+		return ending_language;
 	}
-	public void setTag2(String tag2) {
-		this.tag2 = tag2;
+	public void setEnding_language(String ending_language) {
+		this.ending_language = ending_language;
 	}
-	public String getTag3() {
-		return tag3;
+	public double getValue() {
+		return value;
 	}
-	public void setTag3(String tag3) {
-		this.tag3 = tag3;
-	}
-	public String getTag4() {
-		return tag4;
-	}
-	public void setTag4(String tag4) {
-		this.tag4 = tag4;
-	}
-	public String getTag5() {
-		return tag5;
-	}
-	public void setTag5(String tag5) {
-		this.tag5 = tag5;
+	public void setValue(double value) {
+		this.value = value;
 	}
 }

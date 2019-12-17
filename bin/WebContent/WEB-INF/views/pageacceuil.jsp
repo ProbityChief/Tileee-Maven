@@ -11,25 +11,17 @@
 	<script type="text/javascript" src="index.js"></script>
 	<style><%@include file="css/index.css" %></style>
 </head>
-<body>
+<body style=";">
 <%@include file="header.jsp" %>
+
 	<div id="overall">
-			<article id="textbox">
-			<c:choose>
-				<c:when test="${tL ne null}">
-					<table>
-			<c:forEach items="${tL}" var="lol" varStatus="loop">	
-				<tr><td>Stack ${lol}</td>
-				<td><a href="/entrainementstack/${loop.count}">S'entrainer sur la stack ${lol}</a></td></tr>
-			</c:forEach>
-				</table>
-			</c:when>
-			<c:otherwise>
-				Vous n'avez actuellement entré aucune stack de carte
-			</c:otherwise>
-			</c:choose>
-			</article>
+		<article id="textbox">
+			<p class="inner">
+			Bienvenue ${sessionScope.name}
+			</p>
+		</article>
 	</div>
+	
 <%@include file="footer.jsp" %>
 </body>
 </html>

@@ -11,25 +11,22 @@
 	<script type="text/javascript" src="index.js"></script>
 	<style><%@include file="css/index.css" %></style>
 </head>
-<body>
-<%@include file="header.jsp" %>
+<body style=";">
+	<section id="title">
+		<nav id="menu">
+			<ul>
+				<li><a class="fa fa-user" href="Identification"></a></li>
+				<li onmouseover="document.getElementById('overall').style.filter='blur(3px)'" onmouseout="document.getElementById('overall').style.filter='none'"><a class="fa fa-power-off" href="#"></a></li>
+			</ul>
+		</nav>
+	</section>
+
 	<div id="overall">
-			<article id="textbox">
-			<c:choose>
-				<c:when test="${tL ne null}">
-					<table>
-			<c:forEach items="${tL}" var="lol" varStatus="loop">	
-				<tr><td>Stack ${lol}</td>
-				<td><a href="/entrainementstack/${loop.count}">S'entrainer sur la stack ${lol}</a></td></tr>
-			</c:forEach>
-				</table>
-			</c:when>
-			<c:otherwise>
-				Vous n'avez actuellement entré aucune stack de carte
-			</c:otherwise>
-			</c:choose>
-			</article>
+		<article id="textbox">
+				<p>Indiquer votre adresse e-mail:<br /></p>
+		<input type="text" name="email" placeholder="Entrer votre adresse e-mail">
+		</article>
 	</div>
-<%@include file="footer.jsp" %>
+	<%@include file="footer.jsp" %>
 </body>
 </html>
