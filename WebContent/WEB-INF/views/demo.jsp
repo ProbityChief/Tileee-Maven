@@ -10,8 +10,8 @@
         <script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Tileee</title>
-		<script type="text/javascript" src="index.js"></script>
-		<script src="train.js" type="text/javascript"></script>
+		<script type="text/javascript"><%@include file="js/train.js" %></script>
+		<script type="text/javascript"><%@include file="js/index.js" %></script>
 		<style><%@include file="css/index.css" %></style>
 	</head>
 	<body style=";">
@@ -19,7 +19,7 @@
 		<nav id="menu">
 			<ul>
 				<li><a class="fa fa-user" href="Identification"></a></li>
-				<li onmouseover="document.getElementById('overall').style.filter='blur(3px)'" onmouseout="document.getElementById('overall').style.filter='none'"><a class="fa fa-power-off" href="#"></a></li>
+				<li><a class="fa fa-power-off" href="/tileee"></a></li>
 			</ul>
 		</nav>
 	</section>
@@ -28,11 +28,11 @@
 		        <div class="flippingcard">
             		<div class="card-single">
                 		<div class="face-front">
-                   			<p>mot</p>
+                   			<p></p>
                     		<input type="text" id="input" autocomplete="off">
                 		</div>
                 		<div class="face-back">
-                    		<p>word</p>
+                    		<p></p>
                 		</div>
             		</div>
             		<button id="flip" class="fas fa-check-square fa-6x"></button>

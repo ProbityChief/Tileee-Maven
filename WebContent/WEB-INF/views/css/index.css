@@ -52,10 +52,12 @@ nav ul {
 }
 
 nav li {
+	padding: 10px;
+	padding-right: 30px;
+	padding-left: 30px;
 	list-style-type: none;
 	text-align: center;
 	flex-grow: 1;
-	padding: 10px;
 	transition: padding 0.25s, background 0.5s;
 	background: #1b5774;
 }
@@ -72,8 +74,6 @@ nav a {
 }
 
 nav li:hover {
-	padding-right: 30px;
-	padding-left: 30px;
 	background: #dddddd;
 }
 
@@ -170,7 +170,7 @@ div[class^="card"] [class^="face"] {
 }
 
 div[class^="card"] .face-front {
-	background: rgba(100, 100, 100, 0.75);
+	background: rgba(100, 100, 100, 1);
 	z-index: 5;
 }
 
@@ -247,6 +247,10 @@ input:focus, button:focus {
 	font-size: 2em;
 	font-weight: bold;
 	user-select: none;
+}
+
+footer, #overall{
+	transition: filter 0.25s ease-in-out;
 }
 
 @media all and (max-width: 640px) {

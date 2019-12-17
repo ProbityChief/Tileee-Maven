@@ -1,11 +1,15 @@
 function floutter() {
-	document.querySelector('overall').style.filter='blur(3px)';
-	document.getElementsByTagName('footer').style.filter='blur(3px)';
+	document.querySelector('#overall').style.filter='blur(6px)';
+	document.querySelector('footer').style.filter='blur(6px)';
 }
 
 function defloutter() {
-	document.querySelector('overall').style.filter='none';
-	document.getElementsByTagName('footer').style.filter='none';
+	document.querySelector('#overall').style.filter='';
+	document.querySelector('footer').style.filter='';
 }
 
-window.onload(document.querySelector(".fa-power-off").addEventListener()) 
+window.addEventListener('load', () => {
+	poweroff = document.querySelector(".fa-power-off");
+	poweroff.addEventListener('mouseover', floutter);
+	poweroff.addEventListener('mouseout', defloutter);
+});
