@@ -5,7 +5,8 @@
 <html lang = en>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.css">
+    <script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Tileee</title>
 	<script type="text/javascript"><%@include file="js/train.js" %></script>
@@ -16,8 +17,7 @@
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li><a class="fa fa-user" href="Identification"></a></li>
-				<li><a class="fa fa-power-off" href="#"></a></li>
+				<li><a class="fa fa-user-plus" href="Identification"></a></li>
 			</ul>
 		</nav>
 	</section>

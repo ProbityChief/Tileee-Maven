@@ -5,26 +5,26 @@
 <html lang = en>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.css">
+    <script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Tileee</title>
-	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript"><%@include file="js/train.js" %></script>
+	<script type="text/javascript"><%@include file="js/index.js" %></script>
 	<style><%@include file="css/index.css" %></style>
 </head>
 <body style=";">
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li><a class="fa fa-user" href="Identification"></a></li>
-				<li onmouseover="document.getElementById('overall').style.filter='blur(3px)'" onmouseout="document.getElementById('overall').style.filter='none'"><a class="fa fa-power-off" href="#"></a></li>
+				<li id="quit"><a class="fa fa-reply" href="Identification?action=2"></a></li>
 			</ul>
 		</nav>
 	</section>
 
 	<div id="overall">
-		<article id="textbox">
-				<p>Indiquer votre adresse e-mail:<br /></p>
-		<input type="text" name="email" placeholder="Entrer votre adresse e-mail">
+		<article id="textbox"><br/>
+		<input class="form-control" type="text" name="email" placeholder="Entrer votre adresse e-mail"><br/>
 		</article>
 	</div>
 	<%@include file="footer.jsp" %>

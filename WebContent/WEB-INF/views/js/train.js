@@ -1,7 +1,7 @@
 let index = 0;
 let score = 0;
-let mot = ["mot", "voiture"];
-let traduction = ["word", "car"];
+let mot = ["voiture", "avion", "train", "bateau", "velo", "moto", "metro"];
+let traduction = ["car", "plane", "train", "boat", "bicycle", "motorcycle", "subway"];
 let toIndex = () => {window.location.replace('/tileee')};
 let toTrain = () => {window.location.replace('/tileee/Demo')};
 
@@ -39,19 +39,18 @@ function checkResponse() {
                 input.focus();
             } else {
                 input.remove();
-                check.className = "fas fa-home fa-6x";
                 let result = (score / traduction.length) * 100;
                 let color = result > 90 ? "rgba(25,150,50,1)" : (result > 50 ? "rgba(25,150,175,1)" : "rgba(175,50,25,1)");
                 document.querySelector('.face-front').style = "font-size: 2em; background: " + color;
-                document.querySelector('.face-front p').innerText = result+"%";
-                check.addEventListener("click", toIndex);
+                document.querySelector('.face-front p').innerText = Number.parseFloat(result).toFixed(1)+"%";
+                check.remove();
             }
         }
     }
 }
 
 function insert(){
-    document.querySelector("#traduction").value = fds;
+    document.querySelector("#traduction").value = ;
 }
 
 window.addEventListener("load", () => {

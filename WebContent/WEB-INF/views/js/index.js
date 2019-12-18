@@ -1,6 +1,6 @@
 function floutter() {
-	document.querySelector('#overall').style.filter='blur(6px)';
-	document.querySelector('footer').style.filter='blur(6px)';
+	document.querySelector('#overall').style.filter='blur(50px)';
+	document.querySelector('footer').style.filter='blur(50px)';
 }
 
 function defloutter() {
@@ -9,7 +9,7 @@ function defloutter() {
 }
 
 window.addEventListener('load', () => {
-	poweroff = document.querySelector(".fa-power-off");
+	poweroff = document.querySelector("#quit");
 	poweroff.addEventListener('mouseover', floutter);
 	poweroff.addEventListener('mouseout', defloutter);
 });

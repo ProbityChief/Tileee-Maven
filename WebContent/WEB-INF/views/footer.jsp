@@ -9,6 +9,6 @@
 	<script type="text/javascript" src="index.js"></script>
 </head>
 <body>
-	<footer id="footer" style="text-align: center;">&copy; Tileee - Tous droits réservés</footer>
+	<footer id="footer" style="text-align: center; user-select: none;">&copy; Tileee - Tous droits réservés</footer>
 </body>
 </html>
