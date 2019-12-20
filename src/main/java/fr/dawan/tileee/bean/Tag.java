@@ -4,11 +4,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 @Entity
 @Table(name = "tags")
 public class Tag extends DbObject{
 	private String tag_name;
 	private long card_id;
+	@ManyToMany
+	private Set<Card> cards = new HashSet<>();
 
 	public String getTag_name() {
 		return tag_name;
@@ -21,5 +30,11 @@ public class Tag extends DbObject{
 	}
 	public void setCard_id(long card_id) {
 		this.card_id = card_id;
+	}
+	public long getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(long user_id) {
+		this.user_id = user_id;
 	}
 }

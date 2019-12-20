@@ -1,24 +1,31 @@
 package fr.dawan.tileee.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "cards")
 public class Card extends DbObject{	
+
 	private String word;
 	private String translation;
 	private String starting_language;
 	private String ending_language;
 	private double value;
-	
 	@ManyToOne
 	private User user;
 	public User getUser() {
 		return user;
 	}
+	@ManyToMany(mappedBy="cards")
+	private Set<Tag> tags = new HashSet<>();
+	
 	public void setUser(User user) {
 		this.user = user;
 	}

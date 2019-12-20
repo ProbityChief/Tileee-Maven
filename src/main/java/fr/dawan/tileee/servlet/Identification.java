@@ -77,10 +77,11 @@ public class Identification extends HttpServlet {
 				return;
 			} else {
 				try {
-					connection = ConnectionDB.getConnection();
+
 					String rand = UserValidator.hash(user.getLogin() + "_" + user.getMail());
 					user.setHashcode(rand);
-					UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
+
+					UserDao.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
 							"Votre compte sur Tileee",
 							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getLogin()
 									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
@@ -99,8 +100,9 @@ public class Identification extends HttpServlet {
 			}
 			break;
 		case "login":
-			User login = new User(name, password);
+			User login = new User(name, password, email);
 			try {
+
 				UserDao userdao2 = new UserDao(GenericDao.createEntityManager("tileee"));
 				user = userdao2.findByName(name, false);
 				userValidator = UserValidator.userValidator(email, password, login.isValidation());
@@ -133,8 +135,8 @@ public class Identification extends HttpServlet {
 				if (login.getLogin() != null) {
 
 					HttpSession session = request.getSession();
-
 					session.setAttribute("user", login);
+					
 					response.sendRedirect(request.getContextPath() + "/PageAcceuil"); // request.getContextPath()
 					return;
 

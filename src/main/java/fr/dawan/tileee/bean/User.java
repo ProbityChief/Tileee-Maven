@@ -15,7 +15,7 @@ public class User extends DbObject {
 	private Date registrationdate;
 	private boolean validation;
 	private String hashcode;
-	
+
 	public User() {
 		super();
 	}
@@ -30,6 +30,7 @@ public class User extends DbObject {
 		this.login = login;
 		this.password = password;
 	}
+
 	public String getLogin() {
 		return login;
 	}
