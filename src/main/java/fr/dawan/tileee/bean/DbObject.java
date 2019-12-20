@@ -16,4 +16,5 @@ public abstract class DbObject {
 	public long getId() {
 		return id;
 	}
+	
 }

@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class ConnectionDB {
+import fr.dawan.tileee.bean.Card;
+
+public class ConnectionDB{
 	 public static Connection getConnection() throws ClassNotFoundException, SQLException {
 	        Connection connection = null;
 	        try {

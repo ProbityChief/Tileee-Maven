@@ -1,28 +1,26 @@
 package fr.dawan.tileee.bean;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-public class Card extends DbObject{
-	@Id
-	private long card_id;
-	private long user_id;
+@Entity
+@Table(name = "cards")
+public class Card extends DbObject{	
 	private String word;
 	private String translation;
 	private String starting_language;
 	private String ending_language;
 	private double value;
 	
-	public long getCard_id() {
-		return card_id;
+	@ManyToOne
+	private User user;
+	public User getUser() {
+		return user;
 	}
-	public void setCard_id(long card_id) {
-		this.card_id = card_id;
-	}
-	public long getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getWord() {
 		return word;

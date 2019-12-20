@@ -6,9 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import fr.dawan.tileee.bean.Tags;
+import javax.persistence.EntityManager;
 
-public class TagsDAO {
+import fr.dawan.tileee.bean.Card;
+import fr.dawan.tileee.bean.Tag;
+
+public class TagsDAO extends GenericDao<Tag>{
+	public TagsDAO(EntityManager em) {
+		super(em);
+		// TODO Auto-generated constructor stub
+	}
+
 	public static ArrayList<String> findTags(Connection cnx, boolean CloseConnection) {
 		ArrayList<String> tagsList = new ArrayList<>();
 		PreparedStatement st;

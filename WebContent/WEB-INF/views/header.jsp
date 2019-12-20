@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/js/index.js"></script>
 </head>
 <body>
-<c:if test="${sessionScope.name != null}">
+<c:if test="${sessionScope.user.login != null}">
 	<section id="title">
 		<nav id="menu">
 			<ul>

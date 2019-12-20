@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.ConnectionDB;
+import fr.dawan.tileee.dao.GenericDao;
 import fr.dawan.tileee.dao.UserDao;
 
 /**
@@ -43,14 +44,14 @@ public class FinalisationInscription extends HttpServlet {
     	cnx = ConnectionDB.getConnection();
     	User utilisateur = UserDao.findByRand(rand, cnx , false);
 
-        if(utilisateur.getValidation() == false){
-                System.out.println(utilisateur.getMail() + " " + utilisateur.getName());
+        if(utilisateur.isValidation() == false){
+                System.out.println(utilisateur.getMail() + " " + utilisateur.getLogin());
                 utilisateur.setValidation(true);
                 
-                
-                UserDao.update(utilisateur, cnx, true);
+    			UserDao userdao = new UserDao(GenericDao.createEntityManager("tileee"));
+    			userdao.update(utilisateur, true);
                 HttpSession session = request.getSession();
-                session.setAttribute("name", utilisateur.getName());
+                session.setAttribute("name", utilisateur.getLogin());
                 request.setAttribute( "userMessage" , "Votre compte a été validé! Merci."); 
             } else {
                 request.setAttribute( "userMessage" , "Votre compte a déja été validé! Merci."); 

@@ -1,9 +1,13 @@
 package fr.dawan.tileee.bean;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "invitations")
 public class Invitation extends DbObject{
-	@Id
 	private int issuer_id;
 	private int receiver_id;
 	private String tag_name;

@@ -3,6 +3,7 @@ package fr.dawan.tileee.servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.dawan.tileee.bean.User;
+import fr.dawan.tileee.dao.GenericDao;
 import fr.dawan.tileee.dao.InvitationDAO;
+import fr.dawan.tileee.dao.UserDao;
 
 /**
  * Servlet implementation class Invitation
@@ -41,7 +45,9 @@ public class Invitation extends HttpServlet {
 		request.setAttribute("choix", action);
 		Connection cnx = null;
 		HttpSession session = request.getSession();
-		ArrayList<fr.dawan.tileee.bean.Invitation> listInvitation = InvitationDAO.findInvitation(cnx, true, (String) session.getAttribute("name"));
+		User user = (User) session.getAttribute("user");
+		InvitationDAO invitationdao = new InvitationDAO(GenericDao.createEntityManager("tileee"));
+		List<fr.dawan.tileee.bean.Invitation> listInvitation = invitationdao.findInvitation(user.getLogin(), true);
 		System.out.println(listInvitation.toString());
 		session.setAttribute("listInvitation", listInvitation);
 		request.getRequestDispatcher("WEB-INF/views/invitation.jsp").forward(request, response);

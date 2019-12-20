@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.ConnectionDB;
+import fr.dawan.tileee.dao.GenericDao;
 import fr.dawan.tileee.dao.UserDao;
 import fr.dawan.tileee.validator.UserValidator;
 
@@ -50,6 +51,7 @@ public class Identification extends HttpServlet {
 		case "inscription":
 
 			User user = new User(name, email, password);
+			UserDao userdao = new UserDao(GenericDao.createEntityManager("tileee"));
 
 			String userValidator = UserValidator.userValidator(user, password1);
 
@@ -76,16 +78,16 @@ public class Identification extends HttpServlet {
 			} else {
 				try {
 					connection = ConnectionDB.getConnection();
-					String rand = UserDao.hash(user.getName() + "_" + user.getMail());
-					user.setRand(rand);
-					UserDao.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
+					String rand = UserValidator.hash(user.getLogin() + "_" + user.getMail());
+					user.setHashcode(rand);
+					UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
 							"Votre compte sur Tileee",
-							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getName()
+							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getLogin()
 									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
 									+ rand
 									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
 							null, null, null);
-					UserDao.insert(user, connection, false);
+					userdao.insert(user, false);
 					request.setAttribute("userMessage", "Votre inscription n'est pas termin�e. Ouvrez votre bo�te "
 							+ user.getMail() + " et cliquez sur le lien pour finaliser votre inscription.");
 					// request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request,
@@ -99,8 +101,9 @@ public class Identification extends HttpServlet {
 		case "login":
 			User login = new User(name, password);
 			try {
-				login = UserDao.findByName(name, ConnectionDB.getConnection(), false);
-				userValidator = UserValidator.userValidator(email, password, login.getValidation());
+				UserDao userdao2 = new UserDao(GenericDao.createEntityManager("tileee"));
+				user = userdao2.findByName(name, false);
+				userValidator = UserValidator.userValidator(email, password, login.isValidation());
 				if (!userValidator.equals("")) {
 					request.setAttribute("password", password);
 					request.setAttribute("email", email);
@@ -127,11 +130,11 @@ public class Identification extends HttpServlet {
 			}
 
 			try {
-				if (login.getName() != null) {
+				if (login.getLogin() != null) {
 
 					HttpSession session = request.getSession();
 
-					session.setAttribute("name", login.getName());
+					session.setAttribute("user", login);
 					response.sendRedirect(request.getContextPath() + "/PageAcceuil"); // request.getContextPath()
 					return;
 

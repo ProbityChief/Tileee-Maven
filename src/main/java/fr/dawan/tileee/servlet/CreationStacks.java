@@ -1,7 +1,6 @@
 package fr.dawan.tileee.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -9,10 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.dawan.tileee.bean.Card;
+import fr.dawan.tileee.bean.Tag;
+import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.CardDao;
 import fr.dawan.tileee.dao.ConnectionDB;
+import fr.dawan.tileee.dao.GenericDao;
+import fr.dawan.tileee.dao.UserDao;
 
 /**
  * Servlet implementation class CreationStacks
@@ -49,13 +53,15 @@ public class CreationStacks extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection cnx = null;
-		Card carteAAjouter = new Card();
-		carteAAjouter.setMotATraduire(request.getParameter("motinitial"));
-		carteAAjouter.setMotTraduit(request.getParameter("mottraduit"));
-		carteAAjouter.setLangueInitiale(request.getParameter("langueinitiale"));
-		carteAAjouter.setLangueTraduite(request.getParameter("langueatraduire"));
-		carteAAjouter.setTag1(request.getParameter("tagaajouter"));
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		Card card = new Card();
+		card.setUser(user);
+		card.setWord(request.getParameter("motinitial"));
+		card.setTranslation(request.getParameter("mottraduit"));
+		card.setStarting_language(request.getParameter("langueinitiale"));
+		card.setEnding_language(request.getParameter("langueatraduire"));
 		
 //		carteAAjouter.setTag2(request.getParameter("langueinitiale"));
 //		carteAAjouter.setTag3(request.getParameter("langueinitiale"));
@@ -63,8 +69,9 @@ public class CreationStacks extends HttpServlet {
 //		carteAAjouter.setTag5(request.getParameter("langueinitiale"));
 
 		try {
-			cnx = ConnectionDB.getConnection();
-			CardDao.insertCard(carteAAjouter, cnx, true);
+			CardDao carddao = new CardDao(GenericDao.createEntityManager("tileee"));
+			carddao.insert(card, true);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,4 +82,8 @@ public class CreationStacks extends HttpServlet {
 		doGet(request, response);
 	}
 
+	Tag tag = new Tag();
+	tag.setTag(request.getParameter("tagaajouter"));
+	tag.setUser_Id();
+	tag.setCard_Id();
 }
