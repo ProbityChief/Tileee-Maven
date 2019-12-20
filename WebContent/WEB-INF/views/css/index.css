@@ -1,8 +1,3 @@
-@font-face{
-	src: url('Segoe.ttf');
-	font-family: 'segoe';
-}
-
 .fa, .fab, .fas {
 	font-size: 40px;
 }
@@ -17,7 +12,7 @@ body {
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
-	font-family: 'segoe';
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 body * {
@@ -88,7 +83,7 @@ nav li:hover {
 	font-size: 1.3em !important;
 	width: 400px;
 	margin: auto;
-	font-family: 'Roboto';
+	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	text-align: justify;
 }
@@ -101,7 +96,7 @@ nav li:hover {
 }
 
 .form-control, #submit, ::placeholder {
-	font-family: 'Roboto';
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1em;
 	font-weight: bold;
 	padding: 6px;
@@ -114,7 +109,7 @@ nav li:hover {
 }
 
 #submit, #textButton {
-	font-family: 'Roboto';
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 2em;
 	background: none;
 	border: none;
