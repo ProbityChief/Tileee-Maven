@@ -16,11 +16,18 @@
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li><a class="fa fa-user-plus" href="Identification"></a></li>
-				<li id="quit"><a class="fa fa-reply" href="/tileee"></a></li>
+				<li class="fa fa-user-plus" onclick="window.location.replace('Identification')" title="Login"></li>
+				<li id="quit" class="fa fa-reply" onclick="window.location.replace('/tileee')" title="Retour"></li>
 			</ul>
 		</nav>
 	</section>
+	
+	<c:forEach items="${mot}" var="var">
+	    <input type="hidden" class="mot" value="${var}" />
+	</c:forEach>
+	<c:forEach items="${traduction}" var="vor">
+		<input type="hidden" class="traduction" value="${vor}" />
+	</c:forEach>
 
 	<div id="overall">
 		        <div class="flippingcard">

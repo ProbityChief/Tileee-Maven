@@ -33,7 +33,7 @@
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li id="quit"><a class ="fa fa-reply" href="<%=request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/"%>"></a></li>
+				<li id="quit" class="fa fa-reply" onclick="window.location.replace('/tileee')" title="Retour"></li>
 			</ul>
 		</nav>
 	</section>
@@ -46,21 +46,21 @@
 			</div>
 			<c:if test="${choix == 1}">
 				<form method="post" action="?choix=1&validation=inscription" charset="utf-8" class="inner">
-				<input type="text" name="name" placeholder="Login" class="form-control" required="required"><br/><br/>
-               	<input type="email" name="email" placeholder="Email" class="form-control" required="required"><br/><br/>
-	            <input id="firstPassword" type="password" name="password" placeholder="Mot de passe" class="form-control" required="required"><br/><br/>
-	            <input id="secondPassword" type="password" name="password1" placeholder="Confirmer" class="form-control" required="required"><br/><br/>
-	            <c:if test="${ !empty nameError}">${nameError}<br/></c:if>
-	       		<c:if test="${ !empty emailError}">${emailError}<br/></c:if>
-        		<c:if test="${ !empty passError}">${passError}<br/></c:if>
+				<input type="text" name="name" placeholder="Login" class="form-control" required="required">
+               	<input type="email" name="email" placeholder="Email" class="form-control" required="required">
+	            <input id="firstPassword" type="password" name="password" placeholder="Mot de passe" class="form-control" required="required">
+	            <input id="secondPassword" type="password" name="password1" placeholder="Confirmer" class="form-control" required="required">
+	            <c:if test="${ !empty nameError}">${nameError}</c:if>
+	       		<c:if test="${ !empty emailError}">${emailError}</c:if>
+        		<c:if test="${ !empty passError}">${passError}</c:if>
 	            <button id="submit" type="submit"><i class="fa fa-check" style="color: #1b5774; transition: color 0.25s" onmouseover="this.style.color='#dddddd'" onmouseout="this.style.color='#1b5774'"></i></button>
 			</form>
 			</c:if>
 			<c:if test="${choix == 2}">
 	        <form method="post" action="?choix=2&validation=login" charset="utf-8" class="inner">
-				<input type="text" name="name" placeholder="Login" class="form-control" required="required"><br/><br/>
-	            <input id="firstPassword" type="password" name="password" placeholder="Mot de passe" class="form-control" required="required"><br/><br/>
-	            <button id="submit" type="submit"><i class="fa fa-check" style="color: #1b5774; transition: color 0.25s" onmouseover="this.style.color='#dddddd'" onmouseout="this.style.color='#1b5774'"></i></button><br />
+				<input type="text" name="name" placeholder="Login" class="form-control" required="required">
+	            <input id="firstPassword" type="password" name="password" placeholder="Mot de passe" class="form-control" required="required">
+	            <button id="submit" type="submit"><i class="fa fa-check" style="color: #1b5774; transition: color 0.25s" onmouseover="this.style.color='#dddddd'" onmouseout="this.style.color='#1b5774'"></i></button>
 				<a href="MotDePasseOublie">Mot de passe oublié?</a>
 				<c:if test="${error == 1}">
 				Impossible de trouver le login, rééssayez

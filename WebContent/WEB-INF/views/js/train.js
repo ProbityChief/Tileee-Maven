@@ -1,7 +1,7 @@
 let index = 0;
 let score = 0;
-let mot = ["voiture", "avion", "train", "bateau", "velo", "moto", "metro"];
-let traduction = ["car", "plane", "train", "boat", "bicycle", "motorcycle", "subway"];
+let mot = [];
+let traduction = [];
 let toIndex = () => {window.location.replace('/tileee')};
 let toTrain = () => {window.location.replace('/tileee/Demo')};
 
@@ -49,13 +49,15 @@ function checkResponse() {
     }
 }
 
-function insert(){
-    document.querySelector("#traduction").value = ;
-}
-
 window.addEventListener("load", () => {
     check = document.querySelector("#flip");
     input = document.querySelector("#input");
+    
+    for(let x of document.querySelectorAll('.mot'))
+    	mot.push(x.value);
+    
+    for(let x of document.querySelectorAll('.traduction'))
+    	traduction.push(x.value);
 
     document.querySelector('.face-front p').innerText = traduction[index];
     check.addEventListener("click", checkResponse);

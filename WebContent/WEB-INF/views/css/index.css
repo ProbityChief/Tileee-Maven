@@ -1,3 +1,8 @@
+@font-face{
+	src: url('Segoe.ttf');
+	font-family: 'segoe';
+}
+
 .fa, .fab, .fas {
 	font-size: 40px;
 }
@@ -12,7 +17,7 @@ body {
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: 'segoe';
 }
 
 body * {
@@ -56,26 +61,14 @@ nav li {
 	list-style-type: none;
 	text-align: center;
 	flex-grow: 1;
-	transition: padding 0.25s, background 0.5s;
+	transition: color 0.5s, background 0.5s;
 	background: #1b5774;
-}
-
-nav a {
-	width: 100%;
-	font-weight: bold;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-decoration: none;
-	transition: color 0.5s;
+	color: #dddddd;
+	cursor: pointer;
 }
 
 nav li:hover {
 	background: #dddddd;
-}
-
-nav li:hover>a {
 	color: #1b5774;
 }
 
@@ -117,6 +110,7 @@ nav li:hover>a {
 	border: none;
 	color: #dddddd;
 	align-self: center;
+	margin: 15px 0;
 }
 
 #submit, #textButton {
@@ -129,8 +123,18 @@ nav li:hover>a {
 	transition: background 0.5s;
 }
 
-#textButton:hover {
-	background: #1b5774 !important;
+.otherbutton{
+	color: #dddddd;
+	font-size: 2em;
+	height: 50px;
+}
+
+.otherbutton:hover{
+	background: rgba(27, 87, 116, 0.6);
+}
+
+#textButton:hover{
+	background: #1b5774;
 }
 
 .flippingcard {

@@ -17,7 +17,7 @@
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li><a class="fa fa-user-plus" href="Identification"></a></li>
+				<li class="fa fa-user-plus" onclick="window.location.replace('Identification')" title="Login"></li>
 			</ul>
 		</nav>
 	</section>
@@ -34,7 +34,7 @@
 			évaluer votre maitrise du vocabulaire, améliorer votre compréhension orale et constater vos progrès 
 			à n'importe quel moment!
 			</p>
-			<a id="textButton" style="background: rgba(27, 87, 116, 0.2);" href="Demo">DEMO</a>
+			<a id="textButton" style="background: rgba(27, 87, 116, 0.2);" href="StackDemo">DEMO</a>
 		</article>
 	</div>
 	<footer><%@include file="footer.jsp"%></footer>

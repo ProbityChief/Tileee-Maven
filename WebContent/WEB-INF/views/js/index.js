@@ -1,6 +1,6 @@
 function floutter() {
-	document.querySelector('#overall').style.filter='blur(50px)';
-	document.querySelector('footer').style.filter='blur(50px)';
+	document.querySelector('#overall').style.filter='blur(12px)';
+	document.querySelector('footer').style.filter='blur(12px)';
 }
 
 function defloutter() {

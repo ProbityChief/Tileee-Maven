@@ -17,7 +17,7 @@
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li id="quit"><a class="fa fa-reply" href="Identification?action=2"></a></li>
+				<li id="quit" class="fa fa-reply" onclick="window.location.replace('Identification?action=2')"></li>
 			</ul>
 		</nav>
 	</section>
