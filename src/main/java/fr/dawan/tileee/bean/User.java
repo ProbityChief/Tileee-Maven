@@ -2,11 +2,13 @@ package fr.dawan.tileee.bean;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class User extends DbObject {
-	@Id
-	private long user_id;
+	
+	
 	private String login;
 	private String password;
 	private String mail;
@@ -14,12 +16,7 @@ public class User extends DbObject {
 	private boolean validation;
 	private String hashcode;
 	
-    public long getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
-	}
+   
 	public String getLogin() {
 		return login;
 	}

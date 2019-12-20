@@ -1,20 +1,25 @@
 package fr.dawan.tileee.bean;
 
-import javax.persistence.Id;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Tags extends DbObject{
-	@Id
-	private long tag_id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+
+@Entity
+public class Tag extends DbObject{
+	
+	
 	private String tag_name;
 	private long user_id;
-	private long card_id;
+    
 	
-	public long getTag_id() {
-		return tag_id;
-	}
-	public void setTag_id(long tag_id) {
-		this.tag_id = tag_id;
-	}
+	@ManyToMany
+	private Set<Card> cards = new HashSet<>();
+	
+	
 	public String getTag_name() {
 		return tag_name;
 	}
@@ -27,10 +32,5 @@ public class Tags extends DbObject{
 	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
-	public long getCard_id() {
-		return card_id;
-	}
-	public void setCard_id(long card_id) {
-		this.card_id = card_id;
-	}
+	
 }
