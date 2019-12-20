@@ -35,7 +35,7 @@ section {
 	height: 100px;
 }
 
-em, #menu {
+#menu {
 	font-style: normal !important;
 	text-align: center;
 	font-size: 1.5em;
@@ -120,7 +120,8 @@ nav li:hover {
 
 .otherbutton{
 	color: #dddddd;
-	font-size: 2em;
+	font-size: 3em;
+	padding: 0 0;
 	height: 50px;
 }
 
@@ -129,7 +130,7 @@ nav li:hover {
 }
 
 #textButton:hover{
-	background: #1b5774;
+	background: rgba(27, 87, 116, 1) !important;
 }
 
 .flippingcard {

@@ -8,7 +8,6 @@
         <script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Tileee</title>
-		<script type="text/javascript"><%@include file="js/train.js" %></script>
 		<script type="text/javascript"><%@include file="js/index.js" %></script>
 		<style type="text/css"><%@include file="css/index.css" %></style>
 	</head>
@@ -23,24 +22,11 @@
 		
 		<div id="overall" style="flex-direction: column; justify-content: center; align-items: center;">
 			<form id="textbox" action="Demo" method="post">
-				<div style="display: flex; flex-direction: row;">
-			    	<input type="text" placeholder="Mot" class="form-control" name="mot" required="required" style="margin: 12px;" autocomplete="off"/>
-			    	<input type="text" placeholder="Traduction" class="form-control" name="traduction" required="required" style="margin: 12px;" autocomplete="off"/>
-		    	</div>
 			</form>
-			<div style="display: flex; flex-direction: row; width: 400px;">
+			<div id="buttoncase" style="display: flex; flex-direction: row; width: 400px;">
 				<button onclick="addInputs()" class="fa fa-plus-square otherbutton"></button>
-				<button type="submit" class="fa fa-check-square otherbutton" form="textbox"></button>
 			</div>
 		</div>
 		<footer><%@include file="footer.jsp"%></footer>
-		<script>
-			addInputs = () => {
-				let div = document.createElement('div');
-				let addspace = document.querySelector('#textbox');
-				div.innerHTML = '<div style="display: flex; flex-direction: row;"><input type="text" placeholder="Mot" class="form-control" name="mot" required="required" style="margin: 12px;"  autocomplete="off"/><input type="text" placeholder="Traduction" class="form-control" name="traduction" required="required" style="margin: 12px;"  autocomplete="off"/></div>';
-				addspace.appendChild(div);
-			};
-		</script>
 	</body>
 </html>

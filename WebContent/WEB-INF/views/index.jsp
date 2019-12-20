@@ -25,16 +25,16 @@
 	<div id="overall">
 		<article id="textbox">
 			<p class="inner">
-				<em>Tileee</em> s'adresse à toutes les personnes étudiant les langues.<br/><br/>
-			Les capacités du cerveau à mémoriser le vocabulaire en l'écrivant et le revoyant régulièrement 
-			n'étant plus à prouver, Tileee, reposant sur la méthode des flashcards, vous incitera à remplir 
-			votre mot à traduire ainsi que sa traduction parmi les traductions possibles, et vous permettra, 
-			le cas échéant, d'écouter cette traduction.<br/><br/>
-			Emporter ainsi votre vocabulaire partout avec vous pour 
-			évaluer votre maitrise du vocabulaire, améliorer votre compréhension orale et constater vos progrès 
-			à n'importe quel moment!
+				<span style="font-size: 2em;">Tileee</span> s'adresse à toutes les personnes étudiant les langues.<br/><br/>
+				Les capacités du cerveau à mémoriser le vocabulaire en l'écrivant et le revoyant régulièrement 
+				n'étant plus à prouver, Tileee, reposant sur la méthode des flashcards, vous incitera à remplir 
+				votre mot à traduire ainsi que sa traduction parmi les traductions possibles, et vous permettra, 
+				le cas échéant, d'écouter cette traduction.<br/><br/>
+				Emporter ainsi votre vocabulaire partout avec vous pour 
+				évaluer votre maitrise du vocabulaire, améliorer votre compréhension orale et constater vos progrès 
+				à n'importe quel moment!
 			</p>
-			<a id="textButton" style="background: rgba(27, 87, 116, 0.2);" href="StackDemo">DEMO</a>
+			<a id="textButton" style="background: rgba(27, 87, 116, 0);" href="StackDemo">DEMO</a>
 		</article>
 	</div>
 	<footer><%@include file="footer.jsp"%></footer>
