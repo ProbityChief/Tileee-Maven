@@ -12,6 +12,7 @@ body {
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 body * {
@@ -31,16 +32,13 @@ section {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	font-family: 'Roboto';
 	height: 100px;
 }
 
-em, #menu {
-	font-family: 'Roboto' !important;
+#menu {
 	font-style: normal !important;
 	text-align: center;
 	font-size: 1.5em;
-	transition: letter-spacing 0.25s;
 }
 
 nav ul {
@@ -58,26 +56,14 @@ nav li {
 	list-style-type: none;
 	text-align: center;
 	flex-grow: 1;
-	transition: padding 0.25s, background 0.5s;
+	transition: color 0.5s, background 0.5s;
 	background: #1b5774;
-}
-
-nav a {
-	width: 100%;
-	font-weight: bold;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-decoration: none;
-	transition: color 0.5s;
+	color: #dddddd;
+	cursor: pointer;
 }
 
 nav li:hover {
 	background: #dddddd;
-}
-
-nav li:hover>a {
 	color: #1b5774;
 }
 
@@ -97,19 +83,20 @@ nav li:hover>a {
 	font-size: 1.3em !important;
 	width: 400px;
 	margin: auto;
-	font-family: 'Roboto';
+	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
-	letter-spacing: -2px;
 	text-align: justify;
 }
 
 .inner {
+	display: flex;
+	flex-direction: column;
 	padding: 20px;
 	margin: 0;
 }
 
 .form-control, #submit, ::placeholder {
-	font-family: 'Roboto';
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1em;
 	font-weight: bold;
 	padding: 6px;
@@ -117,10 +104,12 @@ nav li:hover>a {
 	background: #1b5774;
 	border: none;
 	color: #dddddd;
+	align-self: center;
+	margin: 15px 0;
 }
 
 #submit, #textButton {
-	font-family: 'Roboto';
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 2em;
 	background: none;
 	border: none;
@@ -129,8 +118,19 @@ nav li:hover>a {
 	transition: background 0.5s;
 }
 
-#textButton:hover {
-	background: #1b5774 !important;
+.otherbutton{
+	color: #dddddd;
+	font-size: 3em;
+	padding: 0 0;
+	height: 50px;
+}
+
+.otherbutton:hover{
+	background: rgba(27, 87, 116, 0.6);
+}
+
+#textButton:hover{
+	background: rgba(27, 87, 116, 1) !important;
 }
 
 .flippingcard {
@@ -170,13 +170,14 @@ div[class^="card"] [class^="face"] {
 }
 
 div[class^="card"] .face-front {
-	background: rgba(100, 100, 100, 1);
+	background: rgba(100, 100, 100, 0.5);
 	z-index: 5;
 }
 
 div[class^="card"] .face-back {
 	z-index: 0;
 	transform: rotateX(-180deg);
+	opacity: 0;
 }
 
 div[class^="card"].rotated .face-front {
@@ -187,6 +188,7 @@ div[class^="card"].rotated .face-front {
 div[class^="card"].rotated .face-back {
 	z-index: 10;
 	transform: rotateX(0deg);
+	opacity: 1;
 }
 
 button {
@@ -204,6 +206,10 @@ button {
 	transform: translate;
 }
 
+#flip{
+	font-size: 4em;
+}
+
 input {
 	color: grey;
 	font-size: 0.5em;
@@ -212,7 +218,6 @@ input {
 	border: none;
 	border-radius: 6px;
 	padding: 6px;
-	box-shadow: inset 0 0 6px grey;
 	text-transform: inherit;
 }
 

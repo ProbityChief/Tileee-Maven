@@ -49,7 +49,7 @@ public class Identification extends HttpServlet {
 		switch (request.getParameter("validation")) {
 		case "inscription":
 
-			User user = new User(name, email, password);
+			User user = new User(name, password, email);
 
 			String userValidator = UserValidator.userValidator(user, password1);
 
@@ -76,11 +76,10 @@ public class Identification extends HttpServlet {
 			} else {
 				try {
 					connection = ConnectionDB.getConnection();
-					String rand = UserDao.hash(user.getName() + "_" + user.getMail());
-					user.setRand(rand);
+					String rand = UserDao.hash(user.getLogin() + "_" + user.getMail());
 					UserDao.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
 							"Votre compte sur Tileee",
-							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getName()
+							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getLogin()
 									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
 									+ rand
 									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
@@ -97,10 +96,10 @@ public class Identification extends HttpServlet {
 			}
 			break;
 		case "login":
-			User login = new User(name, password);
+			User login = new User(name, password, email);
 			try {
 				login = UserDao.findByName(name, ConnectionDB.getConnection(), false);
-				userValidator = UserValidator.userValidator(email, password, login.getValidation());
+				userValidator = UserValidator.userValidator(email, password, login.isValidation());
 				if (!userValidator.equals("")) {
 					request.setAttribute("password", password);
 					request.setAttribute("email", email);
@@ -127,11 +126,11 @@ public class Identification extends HttpServlet {
 			}
 
 			try {
-				if (login.getName() != null) {
+				if (login.getLogin() != null) {
 
 					HttpSession session = request.getSession();
 
-					session.setAttribute("name", login.getName());
+					session.setAttribute("name", login.getLogin());
 					response.sendRedirect(request.getContextPath() + "/PageAcceuil"); // request.getContextPath()
 					return;
 

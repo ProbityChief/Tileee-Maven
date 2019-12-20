@@ -7,8 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class User extends DbObject {
-	
-	
+
 	private String login;
 	private String password;
 	private String mail;
@@ -16,7 +15,14 @@ public class User extends DbObject {
 	private boolean validation;
 	private String hashcode;
 	
-   
+
+    public User(String login, String password, String mail) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.mail = mail;
+	}
+
 	public String getLogin() {
 		return login;
 	}
