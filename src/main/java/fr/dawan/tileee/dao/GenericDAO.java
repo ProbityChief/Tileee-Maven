@@ -29,7 +29,7 @@ public class GenericDAO<T> {
 	
 	
 	
-	public  <T extends DbObject> void create( T entity, boolean close) {
+	public  <T extends DbObject> void insert(T entity, boolean close) {
 		if (entity != null && entity.getId() == 0) {
 		
 			
@@ -47,8 +47,7 @@ public class GenericDAO<T> {
 				transaction.rollback();
 				ex.printStackTrace();
 			} finally {
-				if(close)
-				{
+				if(close) {
 				em.close();
 				}
 			}
@@ -133,7 +132,7 @@ public class GenericDAO<T> {
 		Root<T> entity = query.from(clazz);
 		
 		// création du "WHERE", dans lequel on insère le "Like"
-		query = query.where(criteriaBuilder.equal(entity.get("user_id"), userId ).);
+		query = query.where(criteriaBuilder.equal(entity.get("user_id"), userId ));
 		
 		// on récupère le résultat
 		resultat = em.createQuery(query).getResultList();

@@ -21,14 +21,7 @@ import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-//imports email
-import org.apache.commons.mail.SimpleEmail;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailAttachment;
-import org.apache.commons.mail.MultiPartEmail;
-
-public class UserDao extends GenericDao<User> {
+public class UserDao extends GenericDAO<User> {
 
 	public UserDao(EntityManager em) {
 		super(em);

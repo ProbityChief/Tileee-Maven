@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 import fr.dawan.tileee.bean.Card;
 import fr.dawan.tileee.bean.Tag;
 
-public class CardDao extends GenericDao<Card>{
+public class CardDao extends GenericDAO<Card>{
 
 	public CardDao(EntityManager em) {
 		super(em);

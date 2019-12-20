@@ -14,7 +14,7 @@ import fr.dawan.tileee.bean.Card;
 import fr.dawan.tileee.bean.Invitation;
 import fr.dawan.tileee.bean.User;
 
-public class InvitationDAO extends GenericDao<Invitation> {
+public class InvitationDAO extends GenericDAO<Invitation> {
 
 	public InvitationDAO(EntityManager em) {
 		super(em);
@@ -31,7 +31,7 @@ public class InvitationDAO extends GenericDao<Invitation> {
 
 		//Le fait de faire un appel au set de formateurs de la formation
 		//va charger les formatteur dans la formation
-		//Hibernate se charge de récupére les données de la table t_formation_formation
+		//Hibernate se charge de rï¿½cupï¿½re les donnï¿½es de la table t_formation_formation
 		
 		if (close)
 			em.close();

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.dawan.tileee.bean.User;
-import fr.dawan.tileee.dao.GenericDao;
+import fr.dawan.tileee.dao.GenericDAO;
 import fr.dawan.tileee.dao.InvitationDAO;
 import fr.dawan.tileee.dao.UserDao;
 
@@ -46,7 +46,7 @@ public class Invitation extends HttpServlet {
 		Connection cnx = null;
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		InvitationDAO invitationdao = new InvitationDAO(GenericDao.createEntityManager("tileee"));
+		InvitationDAO invitationdao = new InvitationDAO(GenericDAO.createEntityManager("tileee"));
 		List<fr.dawan.tileee.bean.Invitation> listInvitation = invitationdao.findInvitation(user.getLogin(), true);
 		System.out.println(listInvitation.toString());
 		session.setAttribute("listInvitation", listInvitation);

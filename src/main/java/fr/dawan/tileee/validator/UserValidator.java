@@ -14,10 +14,9 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 
-import fr.dawan.tileee.dao.ConnectionDB;
-import fr.dawan.tileee.dao.UserDao;
-import fr.dawan.tileee.tool.StringFunctions;
 import fr.dawan.tileee.bean.User;
+import fr.dawan.tileee.dao.ConnectionDB;
+import fr.dawan.tileee.tool.StringFunctions;
 
 public class UserValidator {
 

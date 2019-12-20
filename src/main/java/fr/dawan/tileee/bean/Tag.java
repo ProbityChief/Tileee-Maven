@@ -31,10 +31,4 @@ public class Tag extends DbObject{
 	public void setCard_id(long card_id) {
 		this.card_id = card_id;
 	}
-	public long getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
-	}
 }

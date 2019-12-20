@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.ConnectionDB;
-import fr.dawan.tileee.dao.GenericDao;
+import fr.dawan.tileee.dao.GenericDAO;
 import fr.dawan.tileee.dao.UserDao;
 import fr.dawan.tileee.validator.UserValidator;
 
@@ -51,7 +51,7 @@ public class Identification extends HttpServlet {
 		case "inscription":
 
 			User user = new User(name, email, password);
-			UserDao userdao = new UserDao(GenericDao.createEntityManager("tileee"));
+			UserDao userdao = new UserDao(GenericDAO.createEntityManager("tileee"));
 
 			String userValidator = UserValidator.userValidator(user, password1);
 
@@ -81,7 +81,7 @@ public class Identification extends HttpServlet {
 					String rand = UserValidator.hash(user.getLogin() + "_" + user.getMail());
 					user.setHashcode(rand);
 
-					UserDao.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
+					UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
 							"Votre compte sur Tileee",
 							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getLogin()
 									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
@@ -103,7 +103,7 @@ public class Identification extends HttpServlet {
 			User login = new User(name, password, email);
 			try {
 
-				UserDao userdao2 = new UserDao(GenericDao.createEntityManager("tileee"));
+				UserDao userdao2 = new UserDao(GenericDAO.createEntityManager("tileee"));
 				user = userdao2.findByName(name, false);
 				userValidator = UserValidator.userValidator(email, password, login.isValidation());
 				if (!userValidator.equals("")) {

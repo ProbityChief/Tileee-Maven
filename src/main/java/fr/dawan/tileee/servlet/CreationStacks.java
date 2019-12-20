@@ -15,7 +15,7 @@ import fr.dawan.tileee.bean.Tag;
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.CardDao;
 import fr.dawan.tileee.dao.ConnectionDB;
-import fr.dawan.tileee.dao.GenericDao;
+import fr.dawan.tileee.dao.GenericDAO;
 import fr.dawan.tileee.dao.UserDao;
 
 /**
@@ -69,7 +69,7 @@ public class CreationStacks extends HttpServlet {
 //		carteAAjouter.setTag5(request.getParameter("langueinitiale"));
 
 		try {
-			CardDao carddao = new CardDao(GenericDao.createEntityManager("tileee"));
+			CardDao carddao = new CardDao(GenericDAO.createEntityManager("tileee"));
 			carddao.insert(card, true);
 			
 		} catch (SQLException e) {
