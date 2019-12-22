@@ -9,14 +9,14 @@
 	<!-- plusieurs persistence-unit peuvent être admise, en changeant par exemple 
 		la valeur d'une base de données, ou la base de données elle même. C'est utilie 
 		pour un environnement de développement, test ou prod -->
-	<persistence-unit name="dawantileee"
+	<persistence-unit name="tileee"
 		transaction-type="RESOURCE_LOCAL">
 
 		<properties>
 			<!-- config jpa -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:8889/tileee" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tileee" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 
 			<!-- config jpa -->

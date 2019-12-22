@@ -17,7 +17,7 @@
 	<div id="overall">
 		<article id="textbox">
 			<p class="inner">
-			Bienvenue ${sessionScope.name}
+			Bienvenue ${sessionScope.user.login}
 			</p>
 		</article>
 	</div>

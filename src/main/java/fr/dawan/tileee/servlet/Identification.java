@@ -41,7 +41,6 @@ public class Identification extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Connection connection = null;
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -51,7 +50,6 @@ public class Identification extends HttpServlet {
 		case "inscription":
 
 			User user = new User(name, email, password);
-			UserDao userdao = new UserDao(GenericDAO.createEntityManager("tileee"));
 
 			String userValidator = UserValidator.userValidator(user, password1);
 
@@ -81,30 +79,36 @@ public class Identification extends HttpServlet {
 					String rand = UserValidator.hash(user.getLogin() + "_" + user.getMail());
 					user.setHashcode(rand);
 
-					UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
-							"Votre compte sur Tileee",
-							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getLogin()
-									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
-									+ rand
-									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
-							null, null, null);
-					userdao.insert(user, false);
+//					UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
+//							"Votre compte sur Tileee",
+//							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getLogin()
+//									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
+//									+ rand
+//									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
+//							null, null, null);
+					System.out.println("1");
+					UserDao userdao = new UserDao();
+					System.out.println("2");
+					userdao.insert(user, true);
+					System.out.println("3");
 					request.setAttribute("userMessage", "Votre inscription n'est pas termin�e. Ouvrez votre bo�te "
 							+ user.getMail() + " et cliquez sur le lien pour finaliser votre inscription.");
 					// request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request,
 					// response);
+					System.out.println("4");
 					doGet(request, response);
 					return;
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 			break;
 		case "login":
-			User login = new User(name, password, email);
+			User login = new User(name, password);
 			try {
 
-				UserDao userdao2 = new UserDao(GenericDAO.createEntityManager("tileee"));
-				user = userdao2.findByName(name, false);
+				UserDao userdao2 = new UserDao();
+				user = userdao2.findByName(name, true);
 				userValidator = UserValidator.userValidator(email, password, login.isValidation());
 				if (!userValidator.equals("")) {
 					request.setAttribute("password", password);

@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,23 +17,14 @@ import javax.persistence.criteria.Root;
 import fr.dawan.tileee.bean.DbObject;
 
 public class GenericDAO<T> {
-
 	EntityManager em;
 	EntityTransaction transaction;
 
-	public GenericDAO(EntityManager em) {
-		super();
-		this.em = em;
-		this.transaction = em.getTransaction();
-	}
-
-	
-	
-	
 	public  <T extends DbObject> void insert(T entity, boolean close) {
 		if (entity != null && entity.getId() == 0) {
-		
-			
+			em = createEntityManager();
+			transaction = em.getTransaction();
+	
 			try {
 				// début de la transaction
 				transaction.begin();
@@ -144,8 +136,8 @@ public class GenericDAO<T> {
 	
 
 
-	public static EntityManager createEntityManager(String entitymanagerfactory) {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory(entitymanagerfactory);
+	public static EntityManager createEntityManager() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("dawantileee");
 		EntityManager entityManager = factory.createEntityManager();
 		return entityManager;
 	}

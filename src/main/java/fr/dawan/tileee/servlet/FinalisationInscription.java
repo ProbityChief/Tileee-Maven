@@ -48,7 +48,7 @@ public class FinalisationInscription extends HttpServlet {
                 System.out.println(utilisateur.getMail() + " " + utilisateur.getLogin());
                 utilisateur.setValidation(true);
                 
-    			UserDao userdao = new UserDao(GenericDAO.createEntityManager("tileee"));
+    			UserDao userdao = new UserDao();
     			userdao.update(utilisateur, true);
                 HttpSession session = request.getSession();
                 session.setAttribute("name", utilisateur.getLogin());

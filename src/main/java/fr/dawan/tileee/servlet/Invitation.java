@@ -43,11 +43,10 @@ public class Invitation extends HttpServlet {
 		}
 
 		request.setAttribute("choix", action);
-		Connection cnx = null;
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		InvitationDAO invitationdao = new InvitationDAO(GenericDAO.createEntityManager("tileee"));
-		List<fr.dawan.tileee.bean.Invitation> listInvitation = invitationdao.findInvitation(user.getLogin(), true);
+		InvitationDAO invitationdao = new InvitationDAO();
+		List<fr.dawan.tileee.bean.Invitation> listInvitation = invitationdao.findInvitation(user.getId(), true);
 		System.out.println(listInvitation.toString());
 		session.setAttribute("listInvitation", listInvitation);
 		request.getRequestDispatcher("WEB-INF/views/invitation.jsp").forward(request, response);

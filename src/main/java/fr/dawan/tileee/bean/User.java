@@ -1,5 +1,7 @@
 package fr.dawan.tileee.bean;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,7 +14,7 @@ public class User extends DbObject {
 	private String login;
 	private String password;
 	private String mail;
-	private Date registrationdate;
+	private LocalDate registrationdate;
 	private boolean validation;
 	private String hashcode;
 
@@ -24,6 +26,8 @@ public class User extends DbObject {
 		this.login = login;
 		this.mail = mail;
 		this.password = password;
+		this.registrationdate = LocalDate.now();
+		this.validation = false;
 	}
 	public User(String login, String password) {
 		this();
@@ -49,11 +53,8 @@ public class User extends DbObject {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	public Date getRegistrationdate() {
+	public LocalDate getRegistrationdate() {
 		return registrationdate;
-	}
-	public void setRegistrationdate(Date registrationdate) {
-		this.registrationdate = registrationdate;
 	}
 	public boolean isValidation() {
 		return validation;

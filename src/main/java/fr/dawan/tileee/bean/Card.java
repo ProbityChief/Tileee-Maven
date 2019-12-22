@@ -12,7 +12,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cards")
 public class Card extends DbObject{	
-
 	private String word;
 	private String translation;
 	private String starting_language;
@@ -20,12 +19,12 @@ public class Card extends DbObject{
 	private double value;
 	@ManyToOne
 	private User user;
+	@ManyToMany(mappedBy="cards")
+	private Set<Tag> tags = new HashSet<>();
+
 	public User getUser() {
 		return user;
 	}
-	@ManyToMany(mappedBy="cards")
-	private Set<Tag> tags = new HashSet<>();
-	
 	public void setUser(User user) {
 		this.user = user;
 	}

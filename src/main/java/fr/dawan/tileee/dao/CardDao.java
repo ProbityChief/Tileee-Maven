@@ -15,10 +15,6 @@ import fr.dawan.tileee.bean.Tag;
 
 public class CardDao extends GenericDAO<Card>{
 
-	public CardDao(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
 //		public static int insertCard(Card carte, Connection cnx, boolean closeConnection) throws SQLException {
 //			PreparedStatement ps = cnx.prepareStatement("INSERT INTO cards (word, translate, lang1, lang2, tag1, id_user) VALUES(?,?,?,?,?,?);");
 //			ps.setString(1, carte.getMotATraduire().trim());

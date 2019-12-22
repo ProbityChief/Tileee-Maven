@@ -15,7 +15,6 @@ import javax.persistence.ManyToMany;
 @Table(name = "tags")
 public class Tag extends DbObject{
 	private String tag_name;
-	private long card_id;
 	@ManyToMany
 	private Set<Card> cards = new HashSet<>();
 
@@ -24,11 +23,5 @@ public class Tag extends DbObject{
 	}
 	public void setTag_name(String tag_name) {
 		this.tag_name = tag_name;
-	}
-	public long getCard_id() {
-		return card_id;
-	}
-	public void setCard_id(long card_id) {
-		this.card_id = card_id;
 	}
 }

@@ -5,8 +5,12 @@ import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -14,11 +18,13 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 
+import fr.dawan.tileee.bean.Invitation;
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.ConnectionDB;
+import fr.dawan.tileee.dao.GenericDAO;
 import fr.dawan.tileee.tool.StringFunctions;
 
-public class UserValidator {
+public class UserValidator extends GenericDAO{
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -29,16 +35,13 @@ public class UserValidator {
     }
 
 
-    public static String userValidator(String email, String password, boolean validation){
+    public static String userValidator(String login, String password, boolean validation){
         String message = "";
         if(password.equals("")) {
             message += "password|";
         }
-        if(email.equals("")) {
-            message += "emailNotNull|";
-        }
-        if(!eMailValidate(email)) {
-            message += "invalidEmail|";
+        if(login.equals("")) {
+            message += "loginNotNull|";
         }
         
          
@@ -51,11 +54,10 @@ public class UserValidator {
         
         
         try {
-            Connection cnx = ConnectionDB.getConnection();
-            Boolean isMatches = pswAndLoginMatche(email, password, cnx, false);
+            Boolean isMatches = pswAndLoginMatche(login, password, false);
             if(!isMatches)
-                message += "EmailAndPasswordNotCorrespondant";
-        }catch(Exception e){
+                message += "LoginAndPasswordNotCorrespondant";
+        } catch(Exception e) {
 
         }
         //System.out.println("je retourne message = " + message);
@@ -74,8 +76,7 @@ public class UserValidator {
             message += "invalidEmail";
         } else {
             try {
-                Connection cnx = ConnectionDB.getConnection();
-                Boolean isExist = doesEmailExist(user.getMail(), cnx, false);
+                Boolean isExist = doesEmailExist(user.getMail(), true);
                 if(isExist) {
                     message += "alreadyExistMail";
                 }
@@ -94,20 +95,26 @@ public class UserValidator {
 		return m.matches();
 	}
 	
-	public static Boolean doesEmailExist(String email, Connection cnx, boolean willConnectionClosed) throws Exception {
-		Boolean result = false;
-		int nb = 0;
-		PreparedStatement stmt = cnx.prepareStatement("SELECT * FROM utilisateur WHERE email = ?");
-		stmt.setString(1, email);
-		ResultSet rs = stmt.executeQuery();
+	public static Boolean doesEmailExist(String mail, boolean close) {
 
-		if (rs.next()) {
-			nb = rs.getInt(1);
-		}
-		if (nb > 0)
+		EntityManager em = GenericDAO.createEntityManager();
+		Boolean result = false;
+		String requete = String.format("SELECT f FROM %s f WHERE f.mail = %s", 
+				User.class.getName(), mail);
+		
+		TypedQuery<User> query = em.createQuery(requete,
+				User.class);
+		List<User> resultat = query.getResultList();
+		if (resultat!=null) {
 			result = true;
-		if (willConnectionClosed)
-			cnx.close();
+		}
+
+		//Le fait de faire un appel au set de formateurs de la formation
+		//va charger les formatteur dans la formation
+		//Hibernate se charge de r�cup�re les donn�es de la table t_formation_formation
+		
+		if (close)
+			em.close();
 		return result;
 	}
 
@@ -208,22 +215,26 @@ public class UserValidator {
 //		return result;
 //	}
 
-	public static Boolean pswAndLoginMatche(String email, String typedPassword, Connection cnx,
-			boolean willConnectionClosed) throws Exception {
-		Boolean result = true;
-		PreparedStatement stmt = cnx.prepareStatement("SELECT * FROM utilisateur WHERE email = ?");
-		stmt.setString(1, email);
-		ResultSet resultSet = stmt.executeQuery();
-		while (resultSet.next()) {
-			String oldPassword = resultSet.getString("mdpMD5");
-			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-			byte[] psw1 = messageDigest.digest(typedPassword.getBytes(StandardCharsets.UTF_8));
-			String oldHexHashedPassword1 = bytesToHex(psw1);
-			if (!oldPassword.equals(oldHexHashedPassword1)) {
-				result = false;
-			}
+	public static Boolean pswAndLoginMatche(String login, String typedPassword, boolean close){
+		
+		EntityManager em = GenericDAO.createEntityManager();
+		String requete = String.format("SELECT f FROM %s f WHERE f.login = %s", 
+				User.class.getName(), login);
+		
+		TypedQuery<User> query = em.createQuery(requete,
+				User.class);
+		User resultat = query.getSingleResult();
+		
+		if (close)
+			em.close();
+		if (hashPassword(typedPassword) != resultat.getPassword()) {
+			return false;
 		}
-		return result;
+
+		//Le fait de faire un appel au set de formateurs de la formation
+		//va charger les formatteur dans la formation
+		//Hibernate se charge de r�cup�re les donn�es de la table t_formation_formation
+		return true;
 	}
 	
 	public static String hash(String word) {

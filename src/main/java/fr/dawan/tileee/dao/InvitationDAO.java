@@ -15,18 +15,13 @@ import fr.dawan.tileee.bean.Invitation;
 import fr.dawan.tileee.bean.User;
 
 public class InvitationDAO extends GenericDAO<Invitation> {
-
-	public InvitationDAO(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
 	
-	public List<Invitation> findInvitation(String login, boolean close) {
-		String requete = String.format("SELECT f FROM %s f WHERE f.duree = %d", 
-				Invitation.class.getName(), login);
+	public List<Invitation> findInvitation(long id, boolean close) {
 		
-		TypedQuery<Invitation> query = em.createQuery(requete,
-				Invitation.class);
+		String requete = String.format("SELECT f FROM %s f WHERE f.receiver_id = %d", 
+				Invitation.class.getName(), id);
+		
+		TypedQuery<Invitation> query = em.createQuery(requete, Invitation.class);
 		List<Invitation> resultat = query.getResultList();
 
 		//Le fait de faire un appel au set de formateurs de la formation

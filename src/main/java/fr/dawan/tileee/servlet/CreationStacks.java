@@ -68,22 +68,24 @@ public class CreationStacks extends HttpServlet {
 //		carteAAjouter.setTag4(request.getParameter("langueinitiale"));
 //		carteAAjouter.setTag5(request.getParameter("langueinitiale"));
 
-		try {
-			CardDao carddao = new CardDao(GenericDAO.createEntityManager("tileee"));
-			carddao.insert(card, true);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		doGet(request, response);
+//		try {
+//			CardDao carddao = new CardDao();
+//			carddao.insert(card, true);
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		doGet(request, response);
+//	}
+//
+//	Tag tag = new Tag();
+//	tag.setTag(request.getParameter("tagaajouter"));
+//	tag.setUser_Id();
+//	tag.setCard_Id();
+		
 	}
-
-	Tag tag = new Tag();
-	tag.setTag(request.getParameter("tagaajouter"));
-	tag.setUser_Id();
-	tag.setCard_Id();
 }

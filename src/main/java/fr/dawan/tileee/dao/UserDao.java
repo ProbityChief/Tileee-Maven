@@ -23,11 +23,6 @@ import javax.persistence.TypedQuery;
 
 public class UserDao extends GenericDAO<User> {
 
-	public UserDao(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
-
 	// /**
 //	 * Teste la validit� du format de l'adresse email envoy�e par l'utilisateur
 //	 * @param email
@@ -129,14 +124,13 @@ public class UserDao extends GenericDAO<User> {
 //		return resultSet;
 //	}
 //
-//	public static int update(User user, Connection connection, Boolean willBeClosed) throws Exception {
-//		PreparedStatement ps = connection.prepareStatement("UPDATE users SET validation=? WHERE name=?");
-//		ps.setBoolean(1, true);
-//		ps.setString(2, user.getName());
-//		int resultSet = ps.executeUpdate();
-//
-//		if (willBeClosed)
-//			connection.close();
-//		return resultSet;
-//	}
+	public void update(User user, Boolean close) {
+		String requete = String.format("UPDATE %s f SET validation=1 WHERE f.id=%d", User.class.getName(), user.getId());
+		
+		TypedQuery<User> query = em.createQuery(requete, User.class);
+		query.executeUpdate();
+		
+		if (close)
+			em.close();
+	}
 }
