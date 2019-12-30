@@ -20,11 +20,11 @@ import org.apache.commons.mail.SimpleEmail;
 
 import fr.dawan.tileee.bean.Invitation;
 import fr.dawan.tileee.bean.User;
-import fr.dawan.tileee.dao.ConnectionDB;
-import fr.dawan.tileee.dao.GenericDAO;
+import fr.dawan.tileee.dao.GenericDao;
+import fr.dawan.tileee.dao.UserDao;
 import fr.dawan.tileee.tool.StringFunctions;
 
-public class UserValidator extends GenericDAO{
+public class UserValidator extends GenericDao {
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -54,7 +54,8 @@ public class UserValidator extends GenericDAO{
         
         
         try {
-            Boolean isMatches = pswAndLoginMatche(login, password, false);
+        	UserDao userdao = new UserDao();
+            Boolean isMatches = userdao.pswAndLoginMatche(login, password, true);
             if(!isMatches)
                 message += "LoginAndPasswordNotCorrespondant";
         } catch(Exception e) {
@@ -76,7 +77,8 @@ public class UserValidator extends GenericDAO{
             message += "invalidEmail";
         } else {
             try {
-                Boolean isExist = doesEmailExist(user.getMail(), true);
+            	UserDao userdao = new UserDao();
+                Boolean isExist = userdao.doesEmailExist(user.getMail(), true);
                 if(isExist) {
                     message += "alreadyExistMail";
                 }
@@ -94,31 +96,7 @@ public class UserValidator extends GenericDAO{
 		Matcher m = p.matcher(email.toUpperCase());
 		return m.matches();
 	}
-	
-	public static Boolean doesEmailExist(String mail, boolean close) {
 
-		EntityManager em = GenericDAO.createEntityManager();
-		Boolean result = false;
-		String requete = String.format("SELECT f FROM %s f WHERE f.mail = %s", 
-				User.class.getName(), mail);
-		
-		TypedQuery<User> query = em.createQuery(requete,
-				User.class);
-		List<User> resultat = query.getResultList();
-		if (resultat!=null) {
-			result = true;
-		}
-
-		//Le fait de faire un appel au set de formateurs de la formation
-		//va charger les formatteur dans la formation
-		//Hibernate se charge de r�cup�re les donn�es de la table t_formation_formation
-		
-		if (close)
-			em.close();
-		return result;
-	}
-
-	
 	/**
 	 * Configure un serveur d'envoi de courriel avec pi�ce jointe)
 	 * @param email
@@ -186,7 +164,7 @@ public class UserValidator extends GenericDAO{
 		return hexString.toString();
 	}
 
-	private static String hashPassword(String password) {
+	public static String hashPassword(String password) {
 		String hexHashedPassword = "";
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
@@ -214,28 +192,6 @@ public class UserValidator extends GenericDAO{
 //		}
 //		return result;
 //	}
-
-	public static Boolean pswAndLoginMatche(String login, String typedPassword, boolean close){
-		
-		EntityManager em = GenericDAO.createEntityManager();
-		String requete = String.format("SELECT f FROM %s f WHERE f.login = %s", 
-				User.class.getName(), login);
-		
-		TypedQuery<User> query = em.createQuery(requete,
-				User.class);
-		User resultat = query.getSingleResult();
-		
-		if (close)
-			em.close();
-		if (hashPassword(typedPassword) != resultat.getPassword()) {
-			return false;
-		}
-
-		//Le fait de faire un appel au set de formateurs de la formation
-		//va charger les formatteur dans la formation
-		//Hibernate se charge de r�cup�re les donn�es de la table t_formation_formation
-		return true;
-	}
 	
 	public static String hash(String word) {
 

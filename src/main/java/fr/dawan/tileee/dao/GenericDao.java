@@ -16,9 +16,9 @@ import javax.persistence.criteria.Root;
 
 import fr.dawan.tileee.bean.DbObject;
 
-public class GenericDAO<T> {
-	EntityManager em;
-	EntityTransaction transaction;
+public class GenericDao<T> {
+	protected EntityManager em;
+	protected EntityTransaction transaction;
 
 	public  <T extends DbObject> void insert(T entity, boolean close) {
 		if (entity != null && entity.getId() == 0) {

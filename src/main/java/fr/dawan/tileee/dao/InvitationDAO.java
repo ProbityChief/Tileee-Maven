@@ -14,7 +14,7 @@ import fr.dawan.tileee.bean.Card;
 import fr.dawan.tileee.bean.Invitation;
 import fr.dawan.tileee.bean.User;
 
-public class InvitationDAO extends GenericDAO<Invitation> {
+public class InvitationDAO extends GenericDao<Invitation> {
 	
 	public List<Invitation> findInvitation(long id, boolean close) {
 		

@@ -17,14 +17,14 @@ import fr.dawan.tileee.dao.UserDao;
 /**
  * Servlet implementation class FinalisationInscription
  */
-@WebServlet("/FinalisationInscription")
-public class FinalisationInscription extends HttpServlet {
+@WebServlet("/MessageInscription")
+public class MessageInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FinalisationInscription() {
+    public MessageInscription() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,30 +34,7 @@ public class FinalisationInscription extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-    	String rande = null;
-    	rande = (String) request.getParameter("rand");
-    	System.out.println("RAND = " + rande);
-    	
-    	try {
-    		UserDao userdao = new UserDao();
-    	User utilisateur = userdao.findByRand(rande, true);
-
-        if(utilisateur.isValidation() == false){
-                System.out.println(utilisateur.getMail() + " " + utilisateur.getLogin());
-                utilisateur.setValidation(true);
-                
-    			userdao.update(utilisateur, true);
-                HttpSession session = request.getSession();
-                session.setAttribute("name", utilisateur.getLogin());
-                request.setAttribute( "userMessage" , "Votre compte a �t� valid�! Merci."); 
-            } else {
-                request.setAttribute( "userMessage" , "Votre compte a d�ja �t� valid�! Merci."); 
-            }
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
-    	
-		request.getRequestDispatcher("WEB-INF/views/finalisationinscription.jsp").forward(request,response);
+		request.getRequestDispatcher("WEB-INF/views/messageinscription.jsp").forward(request,response);
 	}
 
 	/**

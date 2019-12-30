@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.ConnectionDB;
-import fr.dawan.tileee.dao.GenericDAO;
 import fr.dawan.tileee.dao.UserDao;
 import fr.dawan.tileee.validator.UserValidator;
 
@@ -77,15 +76,15 @@ public class Identification extends HttpServlet {
 				try {
 
 					String rand = UserValidator.hash(user.getLogin() + "_" + user.getMail());
-					user.setHashcode(rand);
+					user.setRand(rand);
 
-//					UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
-//							"Votre compte sur Tileee",
-//							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getLogin()
-//									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
-//									+ rand
-//									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
-//							null, null, null);
+					UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
+							"Votre compte sur Tileee",
+							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getLogin()
+									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
+									+ rand
+									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
+							null, null, null);
 					System.out.println("1");
 					UserDao userdao = new UserDao();
 					System.out.println("2");
@@ -96,6 +95,7 @@ public class Identification extends HttpServlet {
 					// request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request,
 					// response);
 					System.out.println("4");
+//					response.sendRedirect(request.getContextPath() + "/MessageInscripton");
 					doGet(request, response);
 					return;
 				} catch (Exception e) {

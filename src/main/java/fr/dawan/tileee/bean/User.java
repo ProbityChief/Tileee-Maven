@@ -16,7 +16,7 @@ public class User extends DbObject {
 	private String mail;
 	private LocalDate registrationdate;
 	private boolean validation;
-	private String hashcode;
+	private String rand;
 
 	public User() {
 		super();
@@ -62,10 +62,10 @@ public class User extends DbObject {
 	public void setValidation(boolean validation) {
 		this.validation = validation;
 	}
-	public String getHashcode() {
-		return hashcode;
+	public String getRand() {
+		return rand;
 	}
-	public void setHashcode(String hashcode) {
-		this.hashcode = hashcode;
+	public void setRand(String rand) {
+		this.rand = rand;
 	}
 }

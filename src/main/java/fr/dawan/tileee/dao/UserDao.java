@@ -1,7 +1,9 @@
 package fr.dawan.tileee.dao;
 
+import fr.dawan.tileee.bean.DbObject;
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.tool.StringFunctions;
+import fr.dawan.tileee.validator.UserValidator;
 import fr.dawan.tileee.bean.User;
 
 import java.nio.charset.StandardCharsets;
@@ -21,7 +23,34 @@ import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-public class UserDao extends GenericDAO<User> {
+public class UserDao extends GenericDao<User> {
+	
+	public void insert(User user, boolean close) {
+		if (user != null && user.getId() == 0) {
+			em = createEntityManager();
+			transaction = em.getTransaction();
+			user.setPassword(UserValidator.hashPassword(user.getPassword()));
+	
+			try {
+				// début de la transaction
+				transaction.begin();
+
+				// On insère la formation dans la BDD
+				em.persist(user);
+
+				// on commit tout ce qui s'est fait dans la transaction
+				transaction.commit();
+			} catch (Exception ex) {
+				// en cas d'erreur, on effectue un rollback
+				transaction.rollback();
+				ex.printStackTrace();
+			} finally {
+				if(close) {
+				em.close();
+				}
+			}
+		}
+	}
 
 	// /**
 //	 * Teste la validit� du format de l'adresse email envoy�e par l'utilisateur
@@ -64,23 +93,20 @@ public class UserDao extends GenericDAO<User> {
 		return user;
 	}
 	
-	public static User findByRand(String rand, Connection cnx, boolean closeCnx) throws Exception {
-		User u = new User();
-		PreparedStatement stmt = cnx.prepareStatement("SELECT * FROM users WHERE hashcode = ?");
-		stmt.setString(1, rand);
-		ResultSet rs = stmt.executeQuery();
-
-		if (rs.next()) {
-			u.setLogin(rs.getString("name"));
-			u.setMail(rs.getString("mail"));
-			u.setPassword(rs.getString("pass"));
-			u.setValidation(rs.getBoolean("validation"));
-		}
-		rs.close();
+	public User findByRand(String rand, boolean closeCnx) {
+		
+		em = createEntityManager();
+		transaction = em.getTransaction();
+		
+		String requete = String.format("SELECT f FROM %s f WHERE f.rand = %s", User.class.getName(), rand);
+		
+		TypedQuery<User> query = em.createQuery(requete, User.class);
+		User user = query.getSingleResult();
+		
 		if (closeCnx)
-			cnx.close();
+			em.close();
 
-		return u;
+		return user;
 	}
 //
 //	public static int insert(User user, Connection cnx, boolean willConnectionClosed) throws Exception {
@@ -132,5 +158,51 @@ public class UserDao extends GenericDAO<User> {
 		
 		if (close)
 			em.close();
+	}
+	
+	
+	public Boolean doesEmailExist(String mail, boolean close) {
+
+		Boolean result = false;
+		String requete = String.format("SELECT f FROM %s f WHERE f.mail = %s", 
+				User.class.getName(), mail);
+		
+		TypedQuery<User> query = em.createQuery(requete,
+				User.class);
+		List<User> resultat = query.getResultList();
+		if (resultat!=null) {
+			result = true;
+		}
+
+		//Le fait de faire un appel au set de formateurs de la formation
+		//va charger les formatteur dans la formation
+		//Hibernate se charge de r�cup�re les donn�es de la table t_formation_formation
+		
+		if (close)
+			em.close();
+		return result;
+	}
+
+
+	public Boolean pswAndLoginMatche(String login, String typedPassword, boolean close){
+		
+		EntityManager em = GenericDao.createEntityManager();
+		String requete = String.format("SELECT f FROM %s f WHERE f.login = %s", 
+				User.class.getName(), login);
+		
+		TypedQuery<User> query = em.createQuery(requete,
+				User.class);
+		User resultat = query.getSingleResult();
+		
+		if (close)
+			em.close();
+		if (UserValidator.hashPassword(typedPassword) != resultat.getPassword()) {
+			return false;
+		}
+
+		//Le fait de faire un appel au set de formateurs de la formation
+		//va charger les formatteur dans la formation
+		//Hibernate se charge de r�cup�re les donn�es de la table t_formation_formation
+		return true;
 	}
 }

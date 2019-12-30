@@ -86,7 +86,7 @@ import javax.persistence.criteria.Root;
 
 import fr.dawan.tileee.bean.Tag;
 
-public class TagsDAO extends GenericDAO<Tag>{
+public class TagsDAO extends GenericDao<Tag>{
 
 
 	// Fait comprendre à spring que j'utilise la persistence de JPA

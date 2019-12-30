@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 import fr.dawan.tileee.bean.Card;
 import fr.dawan.tileee.bean.Tag;
 
-public class CardDao extends GenericDAO<Card>{
+public class CardDao extends GenericDao<Card>{
 
 //		public static int insertCard(Card carte, Connection cnx, boolean closeConnection) throws SQLException {
 //			PreparedStatement ps = cnx.prepareStatement("INSERT INTO cards (word, translate, lang1, lang2, tag1, id_user) VALUES(?,?,?,?,?,?);");
