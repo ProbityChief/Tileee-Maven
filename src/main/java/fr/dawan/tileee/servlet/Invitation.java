@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.GenericDAO;
 import fr.dawan.tileee.dao.InvitationDAO;
+import fr.dawan.tileee.dao.TagsDAO;
 import fr.dawan.tileee.dao.UserDao;
 
 /**
@@ -46,7 +47,8 @@ public class Invitation extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		InvitationDAO invitationdao = new InvitationDAO();
-		List<fr.dawan.tileee.bean.Invitation> listInvitation = invitationdao.findInvitation(user.getId(), true);
+		List<fr.dawan.tileee.bean.Invitation> listInvitation = null;
+		listInvitation = invitationdao.findInvitation(user.getId(), true);
 		System.out.println(listInvitation.toString());
 		session.setAttribute("listInvitation", listInvitation);
 		request.getRequestDispatcher("WEB-INF/views/invitation.jsp").forward(request, response);
@@ -57,6 +59,11 @@ public class Invitation extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String rand = request.getParameter("rand");
+		TagsDAO tagsdao = new TagsDAO();
+		tagsdao.cloneTagLib(rand);
+		String tagName = getTagNameByRand(rand);
+		request.setAttribute("tagName", tagName);
 		doGet(request, response);
 	}
 

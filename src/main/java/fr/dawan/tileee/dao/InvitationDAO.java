@@ -18,6 +18,9 @@ public class InvitationDAO extends GenericDAO<Invitation> {
 	
 	public List<Invitation> findInvitation(long id, boolean close) {
 		
+		em = createEntityManager();
+		transaction = em.getTransaction();
+		
 		String requete = String.format("SELECT f FROM %s f WHERE f.receiver_id = %d", 
 				Invitation.class.getName(), id);
 		

@@ -96,9 +96,13 @@ public class TagsDAO extends GenericDAO<Tag>{
 	// recherche des tags par mot clé
 	public Set<Tag> findTags(User user, boolean close)
 	{   
+		em = createEntityManager();
+		transaction = em.getTransaction();
+		
         List<Tag> resultat = null;
 
-		String requete = String.format("SELECT f FROM %s f WHERE f.id = %s", Tag.class.getName(), user.getLogin());
+		String requete = String.format("SELECT f.tag_name FROM %s f INNER JOIN WHERE f.id = ("
+				+ "SELECT t.id FROM %s t WHERE t.user = %b" + ")", Tag.class.getName(),  Card.class.getName(), user);
 		
 		TypedQuery<Tag> query = em.createQuery(requete, Tag.class);
 		resultat = query.getResultList();

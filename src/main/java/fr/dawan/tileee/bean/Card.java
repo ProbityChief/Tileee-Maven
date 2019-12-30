@@ -1,13 +1,17 @@
 package fr.dawan.tileee.bean;
 
+
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "cards")
@@ -17,11 +21,14 @@ public class Card extends DbObject{
 	private String starting_language;
 	private String ending_language;
 	private double value;
-	@ManyToOne
+	@Transient
 	private User user;
-	@ManyToMany(mappedBy="cards")
+	@ManyToMany(mappedBy="cards", cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private Set<Tag> tags = new HashSet<>();
 
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
+	}
 	public User getUser() {
 		return user;
 	}

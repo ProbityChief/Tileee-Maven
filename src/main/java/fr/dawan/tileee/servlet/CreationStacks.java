@@ -16,7 +16,9 @@ import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.CardDao;
 import fr.dawan.tileee.dao.ConnectionDB;
 import fr.dawan.tileee.dao.GenericDAO;
+import fr.dawan.tileee.dao.TagsDAO;
 import fr.dawan.tileee.dao.UserDao;
+import fr.dawan.tileee.validator.UserValidator;
 
 /**
  * Servlet implementation class CreationStacks
@@ -82,10 +84,20 @@ public class CreationStacks extends HttpServlet {
 //		doGet(request, response);
 //	}
 //
-//	Tag tag = new Tag();
-//	tag.setTag(request.getParameter("tagaajouter"));
-//	tag.setUser_Id();
-//	tag.setCard_Id();
-		
+	Tag tag = new Tag();
+	String tagaajouter = new String(request.getParameter("tagaajouter"));
+	tag.setTag_name(tagaajouter);
+	String rand = UserValidator.hash(user.getLogin() + "_" + tagaajouter);
+	tag.setRand(rand);
+	tag.addCard(card);
+	card.addTag(tag);
+	
+	CardDao carddao = new CardDao();
+	carddao.insert(card, true);
+	
+	TagsDAO Tagdao = new TagsDAO();
+	carddao.insert(tag, true);
+	
+	doGet(request, response);
 	}
 }
