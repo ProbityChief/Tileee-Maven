@@ -3,7 +3,9 @@ package fr.dawan.tileee.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +14,7 @@ import javax.persistence.EntityManager;
 
 import fr.dawan.tileee.bean.Card;
 import fr.dawan.tileee.bean.Tag;
+import fr.dawan.tileee.bean.User;
 
 public class CardDao extends GenericDao<Card>{
 
@@ -38,9 +41,25 @@ public class CardDao extends GenericDao<Card>{
 	private EntityManager em;	
 	
 	// recherche des tags par id
-		public List<Card> findById(long id) 
+		public List<Card> findByTag(User user, String tag, boolean close) 
 		{  
-			return em.createQuery("From Card WHERE id =:id")
-			.setParameter("id", id).getResultList();
+			em = createEntityManager();
+			transaction = em.getTransaction();
+
+			
+	        List<Card> resultat = null;
+
+			String requete = "SELECT * "
+					+ "FROM cards "
+					+ "INNER JOIN tags_cards ON tags_cards.tags_id = tags.id "
+					+ "INNER JOIN cards ON tags_cards.cards_id = cards.id "
+					+ "WHERE cards.user_id = " + user.getId();
+			resultat = em.createNativeQuery(requete, Tag.class).getResultList();
+
+			
+			if (close)
+				em.close();
+
+			return resultat;
 		}
 }

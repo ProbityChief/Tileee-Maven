@@ -36,4 +36,8 @@ public class Tag extends DbObject{
 	public void setTag_name(String tag_name) {
 		this.tag_name = tag_name;
 	}
+	
+	public String toString() {
+		return tag_name;
+	}
 }

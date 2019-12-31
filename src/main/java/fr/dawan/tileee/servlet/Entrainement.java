@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import fr.dawan.tileee.bean.Tag;
 import fr.dawan.tileee.bean.User;
-import fr.dawan.tileee.dao.ConnectionDB;
 import fr.dawan.tileee.dao.TagsDAO;
 
 /**
@@ -42,7 +42,9 @@ public class Entrainement extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		TagsDAO tagsdao = new TagsDAO();
 		Set<Tag> tagsList= tagsdao.findTags(user, true);
-		request.setAttribute("tL", tagsList);							
+		List<Tag> tagslist = new ArrayList<Tag>(tagsList);
+		request.setAttribute("tL", tagslist);
+		System.out.println(tagslist.get(0).toString());
 		request.getRequestDispatcher("WEB-INF/views/entrainement.jsp").forward(request,response);
 	}
 

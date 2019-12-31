@@ -94,29 +94,50 @@ public class TagsDAO extends GenericDao<Tag>{
 
 
 	// recherche des tags par mot clé
+//	public Set<Tag> findTags(User user, boolean close)
+//	{   
+//		em = createEntityManager();
+//		transaction = em.getTransaction();
+//		
+//        List<Tag> resultat = null;
+//
+//		String requete = String.format("SELECT f.tag_name FROM %s f INNER JOIN WHERE f.id = ("
+//				+ "SELECT t.id FROM %s t WHERE t.user = %b" + ")", Tag.class.getName(),  Card.class.getName(), user);
+//		
+//		TypedQuery<Tag> query = em.createQuery(requete, Tag.class);
+//		resultat = query.getResultList();
+//		Set<Tag> result = new HashSet<>(resultat);
+//		
+//		if (close)
+//			em.close();
+//
+//		return result;
+//	}
+//	
+//	
+	
 	public Set<Tag> findTags(User user, boolean close)
 	{   
 		em = createEntityManager();
 		transaction = em.getTransaction();
+
 		
         List<Tag> resultat = null;
 
-		String requete = String.format("SELECT f.tag_name FROM %s f INNER JOIN WHERE f.id = ("
-				+ "SELECT t.id FROM %s t WHERE t.user = %b" + ")", Tag.class.getName(),  Card.class.getName(), user);
-		
-		TypedQuery<Tag> query = em.createQuery(requete, Tag.class);
-		resultat = query.getResultList();
+		String requete = "SELECT * "
+				+ "FROM tags "
+				+ "INNER JOIN tags_cards ON tags_cards.tags_id = tags.id "
+				+ "INNER JOIN cards ON tags_cards.cards_id = cards.id "
+				+ "WHERE cards.user_id = " + user.getId();
+		resultat = em.createNativeQuery(requete, Tag.class).getResultList();
 		Set<Tag> result = new HashSet<>(resultat);
+
 		
 		if (close)
 			em.close();
 
 		return result;
 	}
-	
-	
-	
-	
 	
 
 }

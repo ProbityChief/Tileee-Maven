@@ -21,7 +21,7 @@ public class Card extends DbObject{
 	private String starting_language;
 	private String ending_language;
 	private double value;
-	@Transient
+	@ManyToOne
 	private User user;
 	@ManyToMany(mappedBy="cards", cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private Set<Tag> tags = new HashSet<>();

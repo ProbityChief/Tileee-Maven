@@ -14,8 +14,6 @@ import fr.dawan.tileee.bean.Card;
 import fr.dawan.tileee.bean.Tag;
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.CardDao;
-import fr.dawan.tileee.dao.ConnectionDB;
-import fr.dawan.tileee.dao.GenericDAO;
 import fr.dawan.tileee.dao.TagsDAO;
 import fr.dawan.tileee.dao.UserDao;
 import fr.dawan.tileee.validator.UserValidator;
@@ -60,6 +58,7 @@ public class CreationStacks extends HttpServlet {
 		
 		Card card = new Card();
 		card.setUser(user);
+		System.out.println(user.getId());
 		card.setWord(request.getParameter("motinitial"));
 		card.setTranslation(request.getParameter("mottraduit"));
 		card.setStarting_language(request.getParameter("langueinitiale"));
@@ -96,7 +95,7 @@ public class CreationStacks extends HttpServlet {
 	carddao.insert(card, true);
 	
 	TagsDAO Tagdao = new TagsDAO();
-	carddao.insert(tag, true);
+	Tagdao.insert(tag, true);
 	
 	doGet(request, response);
 	}

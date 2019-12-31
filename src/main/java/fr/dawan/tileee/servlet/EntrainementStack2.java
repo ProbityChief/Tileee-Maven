@@ -2,8 +2,6 @@ package fr.dawan.tileee.servlet;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import fr.dawan.tileee.bean.Card;
 import fr.dawan.tileee.bean.Tag;
-import fr.dawan.tileee.bean.User;
-import fr.dawan.tileee.dao.CardDao;
 import fr.dawan.tileee.service.TagsService;
 
 @Controller
 @RequestMapping("tileee")
-public class EntrainementStack {
+public class EntrainementStack2 {
 
 	@Autowired
 	private TagsService service;
@@ -38,14 +33,12 @@ public class EntrainementStack {
 		return "entrainement";	
 	}
 	
-	@GetMapping("/EntrainementStack/{tag}")
-	public String pagination(@PathVariable("tag") String tag, Model model) {
-		CardDao carddao = new CardDao();
-		HttpSession session = model.getSession();
-		User user = (User) session.getAttribute("user");
+	@GetMapping("/pagination/{page}")
+	public String pagination(@PathVariable("page") Integer page, 
+			@PathVariable("max") Integer max, Model model) {
+		int TagPerPage = 5;
+		if( page == null) page = 1;
 		
-		List<Card> listCard = carddao.findByTag(user, tag, true);
-		session.setAttribute()
 		return displayPag(page, TagPerPage, model);
 	}
 }

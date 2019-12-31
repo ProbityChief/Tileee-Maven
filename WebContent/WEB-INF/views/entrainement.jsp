@@ -18,9 +18,9 @@
 			<c:choose>
 				<c:when test="${tL ne null}">
 					<table>
-			<c:forEach items="${tL}" var="lol" varStatus="loop">	
+			<c:forEach items="${tL}" var="lol">	 <!--  varStatus="loop"  -->
 				<tr><td>Stack ${lol}</td>
-				<td><a href="/entrainementstack/${loop.name}">S'entrainer sur la stack ${lol}</a></td></tr>
+				<td><a href="/EntrainementStack/${lol}">S'entrainer sur la stack ${lol}</a></td></tr>
 			</c:forEach>
 				</table>
 			</c:when>
