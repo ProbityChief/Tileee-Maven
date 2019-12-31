@@ -40,7 +40,7 @@ public class FinalisationInscription extends HttpServlet {
     	
     	try {
     		UserDao userdao = new UserDao();
-    	User utilisateur = userdao.findByRand(rande, true);
+    	User utilisateur = userdao.findByRand(rande, false);
 
         if(utilisateur.isValidation() == false){
                 System.out.println(utilisateur.getMail() + " " + utilisateur.getLogin());

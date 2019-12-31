@@ -82,10 +82,14 @@ public class UserDao extends GenericDao<User> {
 //	}
 //	
 	public User findByName(String login, boolean closeCnx) {
-		String requete = String.format("SELECT f FROM %s f WHERE f.login = %s", User.class.getName(), login);
 		
-		TypedQuery<User> query = em.createQuery(requete, User.class);
-		User user = query.getSingleResult();
+		em = createEntityManager();
+		transaction = em.getTransaction();
+//		String requete = String.format("SELECT f FROM %s f WHERE f.login = %s", User.class.getName(), login);
+		
+//		TypedQuery<User> query = em.createQuery(requete, User.class);
+//		User user = query.getSingleResult();
+		User user = (User) em.createNativeQuery("SELECT * FROM users WHERE login = \"" + login +"\"", User.class).getSingleResult();
 		
 		if (closeCnx)
 			em.close();
@@ -98,10 +102,11 @@ public class UserDao extends GenericDao<User> {
 		em = createEntityManager();
 		transaction = em.getTransaction();
 		
-		String requete = String.format("SELECT f FROM %s f WHERE f.rand = %s", User.class.getName(), rand);
-		
-		TypedQuery<User> query = em.createQuery(requete, User.class);
-		User user = query.getSingleResult();
+//		String requete = String.format("SELECT f FROM %s f WHERE f.rand = %s", User.class.getName(), rand);
+//		
+//		TypedQuery<User> query = em.createQuery(requete, User.class);
+		User user = (User) em.createNativeQuery("SELECT * FROM users WHERE rand =" + rand, User.class).getSingleResult();
+//		User user = query.getSingleResult();
 		
 		if (closeCnx)
 			em.close();
