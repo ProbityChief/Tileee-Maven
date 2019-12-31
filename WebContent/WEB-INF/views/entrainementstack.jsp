@@ -15,7 +15,7 @@
 <%@include file="header.jsp" %>
 	<div id="overall">
 			<article id="textbox">
-			<p>Bonjour</p>
+			<p>Bonjour non</p>
 			</article>
 	</div>
 <%@include file="footer.jsp" %>

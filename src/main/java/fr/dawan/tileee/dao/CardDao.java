@@ -41,7 +41,7 @@ public class CardDao extends GenericDao<Card>{
 	private EntityManager em;	
 	
 	// recherche des tags par id
-		public List<Card> findByTag(User user, String tag, boolean close) 
+		public List<Card> findByTag(long id, String tag, boolean close) 
 		{  
 			em = createEntityManager();
 			transaction = em.getTransaction();
@@ -51,9 +51,10 @@ public class CardDao extends GenericDao<Card>{
 
 			String requete = "SELECT * "
 					+ "FROM cards "
-					+ "INNER JOIN tags_cards ON tags_cards.tags_id = tags.id "
-					+ "INNER JOIN cards ON tags_cards.cards_id = cards.id "
-					+ "WHERE cards.user_id = " + user.getId();
+					+ "INNER JOIN tags_cards ON cards.id = tags_cards.cards_id "
+					+ "INNER JOIN tags ON tags_cards.tags_id = tags.id "
+					+ "WHERE cards.user_id = " + id
+					+ " AND tags.tag_name = " + " \""+tag+" \"";
 			resultat = em.createNativeQuery(requete, Tag.class).getResultList();
 
 			
