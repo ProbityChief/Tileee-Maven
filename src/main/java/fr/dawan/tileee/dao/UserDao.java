@@ -25,10 +25,17 @@ import javax.persistence.TypedQuery;
 
 public class UserDao extends GenericDao<User> {
 	
+	private String bdd;
+	
+	public UserDao(String bdd) {
+		super(bdd);
+		this.bdd = bdd;
+		// TODO Auto-generated constructor stub
+	}
+
 	public void insert(User user, boolean close) {
 		if (user != null && user.getId() == 0) {
-			em = createEntityManager();
-			transaction = em.getTransaction();
+
 			user.setPassword(UserValidator.hashPassword(user.getPassword()));
 	
 			try {
@@ -83,8 +90,6 @@ public class UserDao extends GenericDao<User> {
 //	
 	public User findByName(String login, boolean closeCnx) {
 		
-		em = createEntityManager();
-		transaction = em.getTransaction();
 //		String requete = String.format("SELECT f FROM %s f WHERE f.login = %s", User.class.getName(), login);
 		
 //		TypedQuery<User> query = em.createQuery(requete, User.class);
@@ -98,10 +103,7 @@ public class UserDao extends GenericDao<User> {
 	}
 	
 	public User findByRand(String rand, boolean closeCnx) {
-		
-		em = createEntityManager();
-		transaction = em.getTransaction();
-		
+
 //		String requete = String.format("SELECT f FROM %s f WHERE f.rand = %s", User.class.getName(), rand);
 //		
 //		TypedQuery<User> query = em.createQuery(requete, User.class);
@@ -191,7 +193,6 @@ public class UserDao extends GenericDao<User> {
 
 	public Boolean pswAndLoginMatche(String login, String typedPassword, boolean close){
 		
-		EntityManager em = GenericDao.createEntityManager();
 		String requete = String.format("SELECT f FROM %s f WHERE f.login = %s", 
 				User.class.getName(), login);
 		
@@ -212,9 +213,7 @@ public class UserDao extends GenericDao<User> {
 	}
 
 	public User findByMail(String mail, Boolean closeCnx) {
-		em = createEntityManager();
-		transaction = em.getTransaction();
-		
+
 //		String requete = String.format("SELECT f FROM %s f WHERE f.rand = %s", User.class.getName(), rand);
 //		
 //		TypedQuery<User> query = em.createQuery(requete, User.class);

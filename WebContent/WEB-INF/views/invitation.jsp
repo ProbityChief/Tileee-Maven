@@ -138,11 +138,11 @@
 			</c:if>
 			<c:if test="${choix == 3}">
 			<c:if test="${tagName ne null}">
-			 	${tagName}
+			 	<p>La stack ${tagName} à bien été ajoutée à votre liste.</p>
 			</c:if>
 			<table>
-				<form method="post" action="Invitation?action=3" charset="utf-8" class="inner">
-		        <tr><label>Veuillez indiquer le nom de la stack à envoyer : </label></tr>
+				<form method="post" action="?action=3" charset="utf-8" class="inner">
+		        <tr><label>Veuillez indiquer le lien donné par votre ami pour récuperer la stack : </label></tr>
 		        <tr><textarea name="rand" maxlength="40" placeholder="Copier l'URL ici et cliquer sur le bouton ci-dessous"></textarea></tr>
 		        <tr style="text-align:center"><td colspan="2"><button type="submit">
 		        Récupérer la stack</button></td></tr>

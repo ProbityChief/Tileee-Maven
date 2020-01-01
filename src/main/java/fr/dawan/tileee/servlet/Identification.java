@@ -48,7 +48,8 @@ public class Identification extends HttpServlet {
 
 			User user = new User(name, email, password);
 
-			String userValidator = UserValidator.userValidator(user, password1);
+			UserValidator uv = new UserValidator("tileee");
+			String userValidator = uv.userValidator(user, password1);
 
 			if (!userValidator.equals("")) {
 				request.setAttribute("name", name);
@@ -83,7 +84,7 @@ public class Identification extends HttpServlet {
 									+ rand
 									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
 							null, null, null);
-					UserDao userdao = new UserDao();
+					UserDao userdao = new UserDao("tileee");
 					userdao.insert(user, true);
 					request.setAttribute("userMessage", "Votre inscription n'est pas termin�e. Ouvrez votre bo�te "
 							+ user.getMail() + " et cliquez sur le lien pour finaliser votre inscription.");
@@ -126,7 +127,7 @@ public class Identification extends HttpServlet {
 //			}
 			try {
 				if (name != null) {
-					UserDao userdao2 = new UserDao();
+					UserDao userdao2 = new UserDao("tileee");
 					login = userdao2.findByName(name, true);
 					System.out.println(login.getPassword());
 					System.out.println(UserValidator.hashPassword(password));

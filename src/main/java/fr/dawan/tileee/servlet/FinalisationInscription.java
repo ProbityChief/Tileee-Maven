@@ -39,7 +39,7 @@ public class FinalisationInscription extends HttpServlet {
     	System.out.println("RAND = " + rande);
     	
     	try {
-    		UserDao userdao = new UserDao();
+    		UserDao userdao = new UserDao("tileee");
     	User utilisateur = userdao.findByRand(rande, false);
 
         if(utilisateur.isValidation() == false){

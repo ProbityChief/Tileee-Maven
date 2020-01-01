@@ -32,7 +32,7 @@ public class ReinitialisationMDP extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		UserDao userdao = new UserDao();
+		UserDao userdao = new UserDao("tileee");
 		User user = userdao.findByRand(request.getParameter("rand"), true);
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
@@ -56,7 +56,7 @@ public class ReinitialisationMDP extends HttpServlet {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
 			user.setPassword(UserValidator.hashPassword(request.getParameter("nouveaumdp")));
-			UserDao userdao = new UserDao();
+			UserDao userdao = new UserDao("tileee");
 			userdao.update(user, true);
 			session.invalidate();
 			String mess = "Votre mot de passe à bien été réinitialisé. Vous pouvez vous connecter";

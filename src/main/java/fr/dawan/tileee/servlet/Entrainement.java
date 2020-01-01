@@ -40,11 +40,11 @@ public class Entrainement extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		TagsDAO tagsdao = new TagsDAO();
+		TagsDAO tagsdao = new TagsDAO("tileee");
 		Set<Tag> tagsList= tagsdao.findTags(user, true);
 		List<Tag> tagslist = new ArrayList<Tag>(tagsList);
 		request.setAttribute("tL", tagslist);
-		System.out.println(tagslist.get(0).getTag_name());
+//		System.out.println(tagslist.get(0).getTag_name());
 		request.getRequestDispatcher("WEB-INF/views/entrainement.jsp").forward(request,response);
 	}
 

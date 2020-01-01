@@ -18,7 +18,7 @@ import javax.persistence.MapKeyColumn;
 @Table(name = "tags")
 public class Tag extends DbObject{
 	private String tag_name;
-	@ManyToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private Set<Card> cards = new HashSet<>();
 	private String rand; 
 

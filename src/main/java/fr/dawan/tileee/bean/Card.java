@@ -24,7 +24,7 @@ public class Card extends DbObject{
 	private double value;
 	@ManyToOne
 	private User user;
-	@ManyToMany(mappedBy="cards", cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy="cards", cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private Set<Tag> tags = new HashSet<>();
 
 	public void addTag(Tag tag) {

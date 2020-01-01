@@ -16,11 +16,14 @@ import fr.dawan.tileee.bean.User;
 
 public class InvitationDAO extends GenericDao<Invitation> {
 	
+	public InvitationDAO(String bdd) {
+		super(bdd);
+		// TODO Auto-generated constructor stub
+	}
+
 	public List<Invitation> findInvitation(long id, boolean close) {
 		
-		em = createEntityManager();
-		transaction = em.getTransaction();
-		
+
 		String requete = String.format("SELECT f FROM %s f WHERE f.receiver_id = %d", 
 				Invitation.class.getName(), id);
 		

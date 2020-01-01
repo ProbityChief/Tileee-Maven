@@ -20,10 +20,16 @@ public class GenericDao<T> {
 	protected EntityManager em;
 	protected EntityTransaction transaction;
 
+	
+	public GenericDao(String bdd) {
+		super();
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory(bdd);
+		this.em = factory.createEntityManager();
+		this.transaction = em.getTransaction();
+	}
+
 	public  <T extends DbObject> void insert(T entity, boolean close) {
 		if (entity != null && entity.getId() == 0) {
-			em = createEntityManager();
-			transaction = em.getTransaction();
 	
 			try {
 				// début de la transaction
@@ -65,8 +71,6 @@ public class GenericDao<T> {
 
 	public  <T extends DbObject> void update(T entity, boolean close) {
 		if (entity.getId() > 0) {
-			em = createEntityManager();
-			transaction = em.getTransaction();
 			
 			try {
 				// début de la transaction
@@ -134,13 +138,5 @@ public class GenericDao<T> {
 		if(close == true)
 			em.close();
 		return resultat;
-	}
-	
-
-
-	public static EntityManager createEntityManager() {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("dawantileee");
-		EntityManager entityManager = factory.createEntityManager();
-		return entityManager;
 	}
 }

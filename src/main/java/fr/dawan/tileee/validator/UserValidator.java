@@ -26,7 +26,15 @@ import fr.dawan.tileee.tool.StringFunctions;
 
 public class UserValidator extends GenericDao {
 
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+	private String bdd;
+	
+    public UserValidator(String bdd) {
+		super(bdd);
+		this.bdd = bdd;
+		// TODO Auto-generated constructor stub
+	}
+
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public static boolean eMailValidate(String emailStr) {
@@ -35,7 +43,7 @@ public class UserValidator extends GenericDao {
     }
 
 
-    public static String userValidator(String login, String password, boolean validation){
+    public String userValidator(String login, String password, boolean validation){
         String message = "";
         if(password.equals("")) {
             message += "password|";
@@ -54,7 +62,7 @@ public class UserValidator extends GenericDao {
         
         
         try {
-        	UserDao userdao = new UserDao();
+        	UserDao userdao = new UserDao(bdd);
             Boolean isMatches = userdao.pswAndLoginMatche(login, password, true);
             if(!isMatches)
                 message += "LoginAndPasswordNotCorrespondant";
@@ -65,7 +73,7 @@ public class UserValidator extends GenericDao {
         return message;
     }
 
-    public static String userValidator(User user, String passwordConfirmation){
+    public String userValidator(User user, String passwordConfirmation){
         String message = "";
         if(user.getLogin().isEmpty())
             message += "forename";
@@ -77,7 +85,7 @@ public class UserValidator extends GenericDao {
             message += "invalidEmail";
         } else {
             try {
-            	UserDao userdao = new UserDao();
+            	UserDao userdao = new UserDao(bdd);
                 Boolean isExist = userdao.doesEmailExist(user.getMail(), true);
                 if(isExist) {
                     message += "alreadyExistMail";

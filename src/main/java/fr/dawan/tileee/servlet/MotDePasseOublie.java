@@ -39,7 +39,7 @@ public class MotDePasseOublie extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		UserDao userdao = new UserDao();
+		UserDao userdao = new UserDao("tileee");
 		User user = userdao.findByMail((String) request.getParameter("email"), true);
 		System.out.println(user.getRand());
 

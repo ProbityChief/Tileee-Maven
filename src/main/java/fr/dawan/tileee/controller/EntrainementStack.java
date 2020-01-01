@@ -31,7 +31,7 @@ public class EntrainementStack {
 	public String chargementstack(@PathVariable("user") long id, @PathVariable("tag") String tag, Model model) {
 		System.out.println(tag);
 		System.out.println(id);
-		CardDao carddao = new CardDao();
+		CardDao carddao = new CardDao("tileee");
 		List<Card> listCard = carddao.findByTag(id, tag, true);
 		ArrayList<String> mot = new ArrayList<String>();
 		ArrayList<String> traduction = new ArrayList<String>();

@@ -63,26 +63,7 @@ public class CreationStacks extends HttpServlet {
 		card.setTranslation(request.getParameter("mottraduit"));
 		card.setStarting_language(request.getParameter("langueinitiale"));
 		card.setEnding_language(request.getParameter("langueatraduire"));
-		
-//		carteAAjouter.setTag2(request.getParameter("langueinitiale"));
-//		carteAAjouter.setTag3(request.getParameter("langueinitiale"));
-//		carteAAjouter.setTag4(request.getParameter("langueinitiale"));
-//		carteAAjouter.setTag5(request.getParameter("langueinitiale"));
 
-//		try {
-//			CardDao carddao = new CardDao();
-//			carddao.insert(card, true);
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		doGet(request, response);
-//	}
-//
 	Tag tag = new Tag();
 	String tagaajouter = new String(request.getParameter("tagaajouter"));
 	tag.setTag_name(tagaajouter);
@@ -91,10 +72,31 @@ public class CreationStacks extends HttpServlet {
 	tag.addCard(card);
 	card.addTag(tag);
 	
-	CardDao carddao = new CardDao();
+	
+//	carteAAjouter.setTag2(request.getParameter("langueinitiale"));
+//	carteAAjouter.setTag3(request.getParameter("langueinitiale"));
+//	carteAAjouter.setTag4(request.getParameter("langueinitiale"));
+//	carteAAjouter.setTag5(request.getParameter("langueinitiale"));
+
+//	try {
+//		CardDao carddao = new CardDao();
+//		carddao.insert(card, true);
+//		
+//	} catch (SQLException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	} catch (ClassNotFoundException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//	doGet(request, response);
+//}
+//
+	
+	CardDao carddao = new CardDao("tileee");
 	carddao.insert(card, true);
 	
-	TagsDAO Tagdao = new TagsDAO();
+	TagsDAO Tagdao = new TagsDAO("tileee");
 	Tagdao.insert(tag, true);
 	
 	doGet(request, response);

@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import fr.dawan.tileee.bean.Card;
 import fr.dawan.tileee.bean.Tag;
 import fr.dawan.tileee.bean.User;
+import fr.dawan.tileee.validator.UserValidator;
 
 //public class TagsDAO extends GenericDao<Tag>{
 //	
@@ -88,7 +89,7 @@ import fr.dawan.tileee.bean.Tag;
 
 public class TagsDAO extends GenericDao<Tag>{
 
-
+	private String bdd;
 	// Fait comprendre à spring que j'utilise la persistence de JPA
 	// Objet EntityManager avec les infos de connexion à la base
 
@@ -116,11 +117,14 @@ public class TagsDAO extends GenericDao<Tag>{
 //	
 //	
 	
+	public TagsDAO(String bdd) {
+		super(bdd);
+		this.bdd = bdd;
+		// TODO Auto-generated constructor stub
+	}
+
 	public Set<Tag> findTags(User user, boolean close)
 	{   
-		em = createEntityManager();
-		transaction = em.getTransaction();
-
 		
         List<Tag> resultat = null;
 
@@ -137,6 +141,43 @@ public class TagsDAO extends GenericDao<Tag>{
 			em.close();
 
 		return result;
+	}
+	
+	public void CloneTags(String rand, User usertoget, boolean close)
+	{   
+		CardDao carddao = new CardDao("tileeetest");
+		List<Card> listCard = carddao.findByRand(rand, false);
+		
+		
+		Tag tag = new Tag();
+		TagsDAO tagsdao = new TagsDAO("tileeetest");
+		Tag tag2 = tagsdao.findTagNameByRand(rand, false);
+		String tagaajouter = tag2.getTag_name();
+		tag.setTag_name(tagaajouter);
+		String rand2 = UserValidator.hash(usertoget.getLogin() + "_" + tagaajouter);
+		tag.setRand(rand2);
+
+		for(Card c : listCard) {
+			tag.addCard(c);
+			c.addTag(tag);
+			carddao.insert(c, true);
+		}	
+		
+		tagsdao.insert(tag, true);
+		
+		if (close)
+			em.close();
+
+	}
+
+	public Tag findTagNameByRand(String rand, boolean b) {
+		
+		Tag tag = (Tag) em.createNativeQuery("SELECT * FROM tags WHERE rand = \"" + rand +"\"", Tag.class).getSingleResult();
+		
+		if (b)
+			em.close();
+
+		return tag;
 	}
 	
 
