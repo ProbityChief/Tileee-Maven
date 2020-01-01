@@ -65,6 +65,8 @@ public class GenericDao<T> {
 
 	public  <T extends DbObject> void update(T entity, boolean close) {
 		if (entity.getId() > 0) {
+			em = createEntityManager();
+			transaction = em.getTransaction();
 			
 			try {
 				// début de la transaction

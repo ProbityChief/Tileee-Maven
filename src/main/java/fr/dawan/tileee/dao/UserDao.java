@@ -210,4 +210,20 @@ public class UserDao extends GenericDao<User> {
 		//Hibernate se charge de r�cup�re les donn�es de la table t_formation_formation
 		return true;
 	}
+
+	public User findByMail(String mail, Boolean closeCnx) {
+		em = createEntityManager();
+		transaction = em.getTransaction();
+		
+//		String requete = String.format("SELECT f FROM %s f WHERE f.rand = %s", User.class.getName(), rand);
+//		
+//		TypedQuery<User> query = em.createQuery(requete, User.class);
+		User user = (User) em.createNativeQuery("SELECT * FROM users WHERE mail =" + mail, User.class).getSingleResult();
+//		User user = query.getSingleResult();
+		
+		if (closeCnx)
+			em.close();
+
+		return user;
+	}
 }

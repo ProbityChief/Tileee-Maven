@@ -24,6 +24,7 @@
 
 	<div id="overall">
 		<article id="textbox">
+				<c:if test="${message ne null}"><p>${message}</p><br/></c:if><br/>
 			<p class="inner">
 				<span style="font-size: 2em;">Tileee</span> s'adresse à toutes les personnes étudiant les langues.<br/><br/>
 				Les capacités du cerveau à mémoriser le vocabulaire en l'écrivant et le revoyant régulièrement 

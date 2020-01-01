@@ -54,10 +54,10 @@ public class CardDao extends GenericDao<Card>{
 					+ "INNER JOIN tags_cards ON cards.id = tags_cards.cards_id "
 					+ "INNER JOIN tags ON tags_cards.tags_id = tags.id "
 					+ "WHERE cards.user_id = " + id
-					+ " AND tags.tag_name = " + " \""+tag+" \"";
-			resultat = em.createNativeQuery(requete, Tag.class).getResultList();
+					+ " AND tags.tag_name =" + " \""+tag+"\"";
+			resultat = em.createNativeQuery(requete, Card.class).getResultList();
 
-			
+			System.out.println(resultat.get(0).getWord());
 			if (close)
 				em.close();
 

@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.dawan.tileee.bean.User;
+import fr.dawan.tileee.dao.UserDao;
+import fr.dawan.tileee.validator.UserValidator;
+
 /**
  * Servlet implementation class MotDePassOublie
  */
@@ -35,7 +39,25 @@ public class MotDePasseOublie extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		UserDao userdao = new UserDao();
+		User user = userdao.findByMail((String) request.getParameter("email"), true);
+		System.out.println(user.getRand());
+
+		try {
+			UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
+					"Votre compte sur Tileee",
+					"<h1>Demande de nouveau mot de passe sur Tileee</h1><p><br /><br />"
+							+ ", <br /></p><br />Bonjour" + user.getLogin() + ", clique <a href=http://localhost:8080/tileee/ReinitialisationMDP?rand="
+							+ user.getRand()
+							+ ">ici</a> pour redéfinir un nouveau mot de passe sur Tileee.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
+					null, null, null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("userMessage", "Un mail de redéfinition de mot de passe vous a été envoyé");
 		doGet(request, response);
+		return;
 	}
 
 }

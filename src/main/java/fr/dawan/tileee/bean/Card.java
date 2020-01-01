@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,7 +24,7 @@ public class Card extends DbObject{
 	private double value;
 	@ManyToOne
 	private User user;
-	@ManyToMany(mappedBy="cards", cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="cards", cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
 	private Set<Tag> tags = new HashSet<>();
 
 	public void addTag(Tag tag) {
@@ -64,5 +65,10 @@ public class Card extends DbObject{
 	}
 	public void setValue(double value) {
 		this.value = value;
+	}
+	@Override
+	public String toString() {
+		return "Card [word=" + word + ", translation=" + translation + ", starting_language=" + starting_language
+				+ ", ending_language=" + ending_language + ", value=" + value + "]";
 	}
 }

@@ -1,6 +1,7 @@
 package fr.dawan.tileee.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -32,8 +33,18 @@ public class EntrainementStack {
 		System.out.println(id);
 		CardDao carddao = new CardDao();
 		List<Card> listCard = carddao.findByTag(id, tag, true);
-		model.addAttribute("lC", listCard);
-		return "entrainementstack";
+		ArrayList<String> mot = new ArrayList<String>();
+		ArrayList<String> traduction = new ArrayList<String>();
+		
+		System.out.println(listCard.get(0).getWord());
+		for(Card c : listCard) {
+			mot.add(c.getWord());
+			traduction.add(c.getTranslation());
+		}
+
+		model.addAttribute("mot", mot);
+		model.addAttribute("traduction", traduction);
+		return "demo";
 	}
 	
 //	@RequestMapping(value = "/EntrainementStack", method = RequestMethod.GET)

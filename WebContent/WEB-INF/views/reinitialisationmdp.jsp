@@ -13,22 +13,16 @@
 	<script type="text/javascript"><%@include file="js/index.js" %></script>
 	<style><%@include file="css/index.css" %></style>
 </head>
-<body style=";">
-	<section id="title">
-		<nav id="menu">
-			<ul>
-				<li id="quit" class="fa fa-reply" onclick="window.location.replace('Identification?action=2')"></li>
-			</ul>
-		</nav>
-	</section>
-
 	<div id="overall">
 		<article id="textbox"><br/>
-		<form action="MotDePasseOublie" method="post">
-		<input class="form-control" type="text" name="email" placeholder="Entrer votre adresse e-mail"><br/>
-		<input type="submit">
+		<c:if test="${message ne null}"><p>${message}</p><br/></c:if>
+		<form action="ReinitialisationMDP" method="post">
+		<input class="form-control" type="text" name="nouveaumdp" placeholder="Entrez votre nouveau mot de passe"><br/>
+		<input class="form-control" type="text" name="confirmationnouveaumdp" placeholder="Confirmez votre nouveau mot de passe"><br/>
+		<input type="hidden" name="user2" value="${user}">
+		<input type="submit" name="nouveaumdp"><br/>
 		</form>
-		<c:if test="${userMessage ne null}"><p>${userMessage}</p></c:if>
+		<p> </p>
 		</article>
 	</div>
 	<%@include file="footer.jsp" %>

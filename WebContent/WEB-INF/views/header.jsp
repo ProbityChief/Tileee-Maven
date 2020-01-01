@@ -14,10 +14,26 @@
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li><a class="fa fa-layer-group" href="Entrainement"></a></li>
-				<li><a class="fa fa-tag" href="CreationStacks"></a></li>
-				<li><a class="fa fa-user-friends" href="Invitation"></a></li>
-				<li><a class="fa fa-cog" href="Parametres"></a></li>
+				<li><a class="fa fa-layer-group" href="<%= request.getScheme() + "://"
+													+ request.getServerName() + ":"
+													+ request.getServerPort() +
+													request.getContextPath() +
+													"/Entrainement"%>"></a></li>
+				<li><a class="fa fa-tag" href="<%= request.getScheme() + "://"
+													+ request.getServerName() + ":"
+													+ request.getServerPort() +
+													request.getContextPath() +
+													"/CreationStacks"%>"></a></li>
+				<li><a class="fa fa-user-friends" href="<%= request.getScheme() + "://"
+													+ request.getServerName() + ":"
+													+ request.getServerPort() +
+													request.getContextPath() +
+													"/Invitation"%>"></a></li>
+				<li><a class="fa fa-cog" href="<%= request.getScheme() + "://"
+													+ request.getServerName() + ":"
+													+ request.getServerPort() +
+													request.getContextPath() +
+													"/Parametres"%>"></a></li>
 				<li><a class="fa fa-power-off" href="<%= request.getScheme() + "://"
 													+ request.getServerName() + ":"
 													+ request.getServerPort() +
