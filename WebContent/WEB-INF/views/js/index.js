@@ -12,7 +12,7 @@ function defloutter() {
 
 deleteLine = (thatline) => {
 	document.querySelector('.line'+thatline).parentNode.remove();
-	if(document.querySelector('#textbox').innerHTML.length === 4)
+	if(document.querySelector('#textbox').childElementCount === 0)
 		document.querySelector('#valid').remove();
 }
 
