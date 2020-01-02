@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 	<style><%@include file="css/index.css" %></style>
 </head>

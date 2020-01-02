@@ -61,7 +61,7 @@ public class ReinitialisationMDP extends HttpServlet {
 			session.invalidate();
 			String mess = "Votre mot de passe à bien été réinitialisé. Vous pouvez vous connecter";
 			request.setAttribute("message", mess);
-			request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request,response);
+			request.getRequestDispatcher("WEB-INF/views/mdpreinitialise.jsp").forward(request,response);
 			return;
 		} else {
 			String mess = "Problème lors du choix du nouveau mot de passe. Vérifier que les mot de passe concordent"

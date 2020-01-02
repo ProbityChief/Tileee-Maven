@@ -5,9 +5,9 @@
 <html lang = en>
 <head>
 	<meta charset="utf-8">
-    <script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Tileee</title>
+	<script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
 	<script type="text/javascript"><%@include file="js/index.js" %></script>
 	<style><%@include file="css/index.css" %></style>
 </head>
@@ -15,20 +15,16 @@
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li id="quit" class="fa fa-reply" onclick="window.location.replace('Identification?action=2')"></li>
+				<li><a class="fa fa-user-plus" href="Identification?action=2"></a></li>
 			</ul>
 		</nav>
 	</section>
 
 	<div id="overall">
-		<article id="textbox"><br/>
-		<form action="MotDePasseOublie" method="post">
-		<input class="form-control" type="text" name="email" placeholder="Entrer votre adresse e-mail"><br/>
-		<input type="submit">
-		</form>
-		<c:if test="${userMessage ne null}"><p>${userMessage}</p></c:if>
+		<article id="textbox">
+				<c:if test="${message ne null}"><p>${message}</p><br/></c:if><br/>
 		</article>
 	</div>
-	<%@include file="footer.jsp" %>
+	<footer><%@include file="footer.jsp"%></footer>
 </body>
 </html>

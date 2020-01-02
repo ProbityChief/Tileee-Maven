@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang = en>
 	<head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.css">
         <script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Tileee</title>

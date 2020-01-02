@@ -180,5 +180,29 @@ public class TagsDAO extends GenericDao<Tag>{
 		return tag;
 	}
 	
+	public Tag findTagByTagname(String tagName, boolean b) {
+		
+		Tag tag = (Tag) em.createNativeQuery("SELECT * FROM tags WHERE tag_name = \"" + tagName +"\"", Tag.class).getSingleResult();
+		
+		if (b)
+			em.close();
+
+		return tag;
+	}
+
+	public boolean tagExist(String tagName, boolean b) {
+		// TODO Auto-generated method stub
+		try {
+		Tag tag = (Tag) em.createNativeQuery("SELECT * FROM tags WHERE tag_name = \"" + tagName +"\"", Tag.class).getSingleResult();
+		return true;
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+		if (b)
+			em.close();
+		return false;
+		}
+	}
+	
 
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,8 +43,11 @@ public class Entrainement extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		TagsDAO tagsdao = new TagsDAO("tileee");
 		Set<Tag> tagsList= tagsdao.findTags(user, true);
-		List<Tag> tagslist = new ArrayList<Tag>(tagsList);
-		request.setAttribute("tL", tagslist);
+		Set<String> tags = new HashSet<String>();
+		for(Tag T : tagsList) {
+			tags.add(T.getTag_name());
+		}
+		request.setAttribute("tL", tags);
 //		System.out.println(tagslist.get(0).getTag_name());
 		request.getRequestDispatcher("WEB-INF/views/entrainement.jsp").forward(request,response);
 	}
