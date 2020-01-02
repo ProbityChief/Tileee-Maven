@@ -1,6 +1,5 @@
 package fr.dawan.tileee.servlet;
 
-import java.io.Console;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
+import org.hibernate.LockMode;
 
 import fr.dawan.tileee.bean.User;
-import fr.dawan.tileee.dao.GenericDao;
 import fr.dawan.tileee.dao.UserDao;
 
 /**
- * Servlet implementation class Parametres
+ * Servlet implementation class SuppressionCompte
  */
-@WebServlet("/Parametres")
-public class Parametres extends HttpServlet {
+@WebServlet("/SuppressionCompte")
+public class SuppressionCompte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Parametres() {
+    public SuppressionCompte() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,15 +31,25 @@ public class Parametres extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/views/parametres.jsp").forward(request, response);
+    	HttpSession session = request.getSession();
+    	User user = (User)session.getAttribute("user");
+		try {
+    		UserDao userdao = new UserDao("tileee");
+    		userdao.delete(user, true);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+    	session.invalidate();
+		request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -99,7 +99,7 @@ public class GenericDao<T> {
 			// début de la transaction
 			transaction.begin();
 
-			em.remove(entity);
+			em.remove(em.merge(entity));
 
 			// on commit tout ce qui s'est fait dans la transaction
 			transaction.commit();
