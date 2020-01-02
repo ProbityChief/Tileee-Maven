@@ -7,13 +7,13 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Insert title here</title>
+	<style><%@include file="css/index.css" %></style>
 </head>
 <body>
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li><a class="fa fa-user" href="Identification"></a></li>
-				<li onmouseover="document.getElementById('overall').style.filter='blur(3px)'" onmouseout="document.getElementById('overall').style.filter='none'"><a class="fa fa-power-off" href="#"></a></li>
+				<li><a class="fa fa-user" href="Identification?action=2"></a></li>
 			</ul>
 		</nav>
 	</section>

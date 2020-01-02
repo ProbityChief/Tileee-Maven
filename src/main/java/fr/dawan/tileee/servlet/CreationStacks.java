@@ -2,6 +2,9 @@ package fr.dawan.tileee.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +47,12 @@ public class CreationStacks extends HttpServlet {
 		}
 		
 		request.setAttribute("validation", action);
-		
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		TagsDAO tagsdao = new TagsDAO("tileee");
+		Set<Tag> tagsList= tagsdao.findTags(user, true);
+		List<Tag> tagslist = new ArrayList<Tag>(tagsList);
+		request.setAttribute("lTag", tagslist);
 		request.getRequestDispatcher("WEB-INF/views/creationstacks.jsp").forward(request,response);
 	}
 

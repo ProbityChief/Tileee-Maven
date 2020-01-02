@@ -47,9 +47,9 @@ public class MotDePasseOublie extends HttpServlet {
 			UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
 					"Votre compte sur Tileee",
 					"<h1>Demande de nouveau mot de passe sur Tileee</h1><p><br /><br />"
-							+ ", <br /></p><br />Bonjour" + user.getLogin() + ", clique <a href=http://localhost:8080/tileee/ReinitialisationMDP?rand="
+							+ ", <br /></p><br />Bonjour " + user.getLogin() + ", clique <a href=http://localhost:8181/tileee/ReinitialisationMDP?rand="
 							+ user.getRand()
-							+ ">ici</a> pour redéfinir un nouveau mot de passe sur Tileee.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
+							+ ">ici</a> pour red&eacute;finir un nouveau mot de passe sur Tileee.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
 					null, null, null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

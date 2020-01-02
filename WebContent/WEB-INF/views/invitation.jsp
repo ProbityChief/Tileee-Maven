@@ -5,12 +5,13 @@
 <html lang = en>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Tileee</title>
-	<script type="text/javascript" src="index.js"></script>
-	<style><%@include file="css/index.css" %>
- 	<c:if test="${choix == 1}">
+	<script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
+	<script type="text/javascript"><%@include file="js/invitation.js" %></script>
+	<script type="text/javascript"><%@include file="js/index.js" %></script>
+	<style><%@include file="css/index.css" %></style>
+ 	<style><c:if test="${choix == 1}">
  				.presentation {
  					background: transparent;
  				}
@@ -117,19 +118,14 @@
 			</c:if>
 			<c:if test="${choix == 2}">
 					<c:choose>
-				<c:when test="${lT ne null}">
-					<table id="tabletag">
-			<tr><td><label>Veuillez indiquer la stack à envoyer : </label></td>
-			<td><select>Liste de stacks
-			<c:forEach items="${lT}" var="lol" varStatus="loop">	
-		        	<option>${lT.tag_name}</option>
-			</c:forEach>
-			</select></td></tr>
-			<tr id="avantderniereligne"><a onclick="">Obtenir le lien de partage<a></tr>
-				<tr><div style="width: 600px;  padding-top:10px; padding-bottom:10px;
-				border: 3px solid #A0A0A0; text-align: center;background: #C0C0C0;"> 
-				http://localhost:8080/tileee/Invitation?action=3&rand=${lol.rand}</div></tr>
-				</table>
+				<c:when test="${lTag ne null}">
+			<select id="selecttag" name="tag" id="tag">
+      			<c:forEach items="${lTag}" var="lol">
+      			<option value="${lol.rand}">${lol.tag_name}</option>
+      			</c:forEach>
+      		</select>
+      		<button onclick="obtenirrand()">Obtenir le numero de partage</button>
+      		<textarea id="randtag" rows="1" cols="60"></textarea>
 			</c:when>
 			<c:otherwise>
 				Vous n'avez actuellement aucune stack à partager avec vos amis
@@ -143,7 +139,7 @@
 			<table>
 				<form method="post" action="?action=3" charset="utf-8" class="inner">
 		        <tr><label>Veuillez indiquer le lien donné par votre ami pour récuperer la stack : </label></tr>
-		        <tr><textarea name="rand" maxlength="40" placeholder="Copier l'URL ici et cliquer sur le bouton ci-dessous"></textarea></tr>
+		        <tr><textarea name="rand" maxlength="60"></textarea></tr>
 		        <tr style="text-align:center"><td colspan="2"><button type="submit">
 		        Récupérer la stack</button></td></tr>
 		        </form>

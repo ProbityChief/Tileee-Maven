@@ -217,7 +217,7 @@ public class UserDao extends GenericDao<User> {
 //		String requete = String.format("SELECT f FROM %s f WHERE f.rand = %s", User.class.getName(), rand);
 //		
 //		TypedQuery<User> query = em.createQuery(requete, User.class);
-		User user = (User) em.createNativeQuery("SELECT * FROM users WHERE mail =" + mail, User.class).getSingleResult();
+		User user = (User) em.createNativeQuery("SELECT * FROM users WHERE mail =" + "\"" + mail +"\"", User.class).getSingleResult();
 //		User user = query.getSingleResult();
 		
 		if (closeCnx)

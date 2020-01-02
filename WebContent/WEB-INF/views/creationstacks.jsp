@@ -33,14 +33,15 @@
 </select><br />
       <input type="text" placeholder="Entrer le mot à traduire" name="motinitial">
       <input type="text" placeholder="Entrer le mot traduit" name="mottraduit"><br />
-      Ajouter un nouveau tag ou selectionner un ou plusieurs tags (5 maximums):
+      Ajouter un nouveau tag ou sélectionner un ou plusieurs tags (5 maximums):
             <input type="text" placeholder="Entrer un nouveau tag" name="tagaajouter"><br />
-      		<select name="langueinitiale" id="lg-initiale">
-    <option value="">tags</option>
-    <option value="transport">Transport</option>
-    <option value="maison">Maison</option>
+      		<select name="tag" id="tag">
+      			<c:forEach items="${lTag}" var="lol">
+      			<option value="${lol}">${lol}</option>
+      			</c:forEach>
+      		</select>
+    
     <input type="submit" value="Envoyer carte">
-</select>
 </form><p>
 		</article>
 	</div>

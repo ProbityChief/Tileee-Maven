@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,13 +45,14 @@ public class Invitation extends HttpServlet {
 		}
 
 		request.setAttribute("choix", action);
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		InvitationDAO invitationdao = new InvitationDAO("tileee");
-		List<fr.dawan.tileee.bean.Invitation> listInvitation = null;
-		listInvitation = invitationdao.findInvitation(user.getId(), true);
-		System.out.println(listInvitation.toString());
-		session.setAttribute("listInvitation", listInvitation);
+//		if (action == "2") {
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("user");
+			TagsDAO tagsdao = new TagsDAO("tileee");
+			Set<Tag> tagsList= tagsdao.findTags(user, true);
+			List<Tag> tagslist = new ArrayList<Tag>(tagsList);
+			request.setAttribute("lTag", tagslist);
+//		}
 		request.getRequestDispatcher("WEB-INF/views/invitation.jsp").forward(request, response);
 	}
 
