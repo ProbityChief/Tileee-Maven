@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Tileee</title>
 	<script type="text/javascript" src="index.js"></script>
-	<style><%@include file="css/index.css" %></style>
+	<style type="text/css"><%@include file="css/index.css" %></style>
 </head>
 <body>
 <%@include file="header.jsp" %>

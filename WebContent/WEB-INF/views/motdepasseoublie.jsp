@@ -24,9 +24,9 @@
 
 	<div id="overall">
 		<article id="textbox"><br/>
-		<form action="MotDePasseOublie" method="post">
+		<form action="MotDePasseOublie" method="post" class="inner">
 		<input class="form-control" type="text" name="email" placeholder="Entrer votre adresse e-mail"><br/>
-		<input type="submit">
+		<input type="submit" class="form-control">
 		</form>
 		<c:if test="${userMessage ne null}"><p>${userMessage}</p></c:if>
 		</article>

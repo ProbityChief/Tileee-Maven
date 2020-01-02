@@ -92,14 +92,13 @@ public class GenericDao<T> {
 		}
 	}
 
-	public  <T extends DbObject> void delete( Class<T> clazz, long id, boolean close) {
+	public  <T extends DbObject> void delete(T entity, boolean close) {
 		
 
 		try {
 			// début de la transaction
 			transaction.begin();
 
-			T entity = em.find(clazz, id);
 			em.remove(entity);
 
 			// on commit tout ce qui s'est fait dans la transaction
