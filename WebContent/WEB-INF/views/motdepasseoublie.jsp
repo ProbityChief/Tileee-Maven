@@ -24,7 +24,11 @@
 
 	<div id="overall">
 		<article id="textbox"><br/>
+		<form action="MotDePasseOublie" method="post">
 		<input class="form-control" type="text" name="email" placeholder="Entrer votre adresse e-mail"><br/>
+		<input type="submit">
+		</form>
+		<c:if test="${userMessage ne null}"><p>${userMessage}</p></c:if>
 		</article>
 	</div>
 	<%@include file="footer.jsp" %>

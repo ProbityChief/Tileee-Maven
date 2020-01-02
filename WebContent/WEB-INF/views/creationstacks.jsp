@@ -24,11 +24,11 @@
 		<select name="langueinitiale" id="lg-initiale">
     <option value="">Veuillez indiquer la langue du mot à traduire</option>
     <option value="français">Français</option>
-    <option value="anglais">Anglais</option>
+    <option value="anglais" selected="selected">Anglais</option>
 </select>
 <select name="langueatraduire" id="lg-atraduire">
     <option value="">Veuillez indiquer la langue du mot traduit</option>
-    <option value="français">Français</option>
+    <option value="français" selected="selected">Français</option>
     <option value="anglais">Anglais</option>
 </select><br />
       <input type="text" placeholder="Entrer le mot à traduire" name="motinitial">

@@ -1,7 +1,6 @@
 package fr.dawan.tileee.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.dawan.tileee.bean.User;
-import fr.dawan.tileee.dao.ConnectionDB;
 import fr.dawan.tileee.dao.UserDao;
 import fr.dawan.tileee.validator.UserValidator;
 
@@ -40,7 +38,6 @@ public class Identification extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Connection connection = null;
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -49,9 +46,10 @@ public class Identification extends HttpServlet {
 		switch (request.getParameter("validation")) {
 		case "inscription":
 
-			User user = new User(name, password, email);
+			User user = new User(name, email, password);
 
-			String userValidator = UserValidator.userValidator(user, password1);
+			UserValidator uv = new UserValidator("tileee");
+			String userValidator = uv.userValidator(user, password1);
 
 			if (!userValidator.equals("")) {
 				request.setAttribute("name", name);
@@ -75,65 +73,74 @@ public class Identification extends HttpServlet {
 				return;
 			} else {
 				try {
-					connection = ConnectionDB.getConnection();
-					String rand = UserDao.hash(user.getLogin() + "_" + user.getMail());
-					UserDao.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
+
+					String rand = UserValidator.hash(user.getLogin() + "_" + user.getMail());
+					user.setRand(rand);
+
+					UserValidator.sendEmail("Tileee <dawan-test@gmail.com>", user.getMail(),
 							"Votre compte sur Tileee",
 							"<h1>Bienvenu sur Tileee</h1><p><br /><br />" + user.getLogin()
 									+ ", <br /></p><br />Bienvenu sur Tileee, veuillez cliquer <a href=http://localhost:8181/tileee/FinalisationInscription?rand="
 									+ rand
 									+ ">ici</a> pour activer votre compte.<p><p>Cordialement,</p><p>L'&eacute;quipe Tileee</p>",
 							null, null, null);
-					UserDao.insert(user, connection, false);
+					UserDao userdao = new UserDao("tileee");
+					userdao.insert(user, true);
 					request.setAttribute("userMessage", "Votre inscription n'est pas termin�e. Ouvrez votre bo�te "
 							+ user.getMail() + " et cliquez sur le lien pour finaliser votre inscription.");
-					// request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request,
-					// response);
 					doGet(request, response);
 					return;
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 			break;
 		case "login":
-			User login = new User(name, password, email);
+			User login = null;
+//			try {
+//			UserDao userdao2 = new UserDao();
+//			login = userdao2.findByName(name, true);
+//				userValidator = UserValidator.userValidator(email, password, login.isValidation());
+//				if (!userValidator.equals("")) {
+//					request.setAttribute("password", password);
+//					request.setAttribute("email", email);
+//					if (userValidator.contains("emailNotNull"))
+//						request.setAttribute("messagePassword", "Le mot de passe est obligatoire");
+//					if (userValidator.contains("invalidEmail"))
+//						request.setAttribute("messageEmail", "Format incorrect de l'adresse e-mail");
+//					if (userValidator.contains("password"))
+//						request.setAttribute("messagePassword", "Le mot de passe est obligatoire");
+//					if (userValidator.contains("EmailAndPasswordNotCorrespondant")) {
+//						request.setAttribute("messagePassword", "Mot de passe incorrect");
+//						request.setAttribute("password", "");
+//					}
+//
+//					if (userValidator.contains("noValidationForThisUser"))
+//						request.setAttribute("messageEmail",
+//								"Pour valider votre compte, ouvrez votre email et cliquez sur le lien 'ici'<br />");
+//
+//					doGet(request, response);
+//					return;
+//				}
+//			} catch (Exception e) {
+//				e.getMessage();
+//			}
 			try {
-				login = UserDao.findByName(name, ConnectionDB.getConnection(), false);
-				userValidator = UserValidator.userValidator(email, password, login.isValidation());
-				if (!userValidator.equals("")) {
-					request.setAttribute("password", password);
-					request.setAttribute("email", email);
-					if (userValidator.contains("emailNotNull"))
-						request.setAttribute("messagePassword", "Le mot de passe est obligatoire");
-					if (userValidator.contains("invalidEmail"))
-						request.setAttribute("messageEmail", "Format incorrect de l'adresse e-mail");
-					if (userValidator.contains("password"))
-						request.setAttribute("messagePassword", "Le mot de passe est obligatoire");
-					if (userValidator.contains("EmailAndPasswordNotCorrespondant")) {
-						request.setAttribute("messagePassword", "Mot de passe incorrect");
-						request.setAttribute("password", "");
+				if (name != null) {
+					UserDao userdao2 = new UserDao("tileee");
+					login = userdao2.findByName(name, true);
+					System.out.println(login.getPassword());
+					System.out.println(UserValidator.hashPassword(password));
+					if (UserValidator.hashPassword(password).equals(login.getPassword())) {
+						HttpSession session = request.getSession();
+						session.setAttribute("user", login);
+						response.sendRedirect(request.getContextPath() + "/PageAcceuil"); // request.getContextPath()
+						return;
+					} else {
+						request.setAttribute("error1", "2");
+						doGet(request, response);
+						return;
 					}
-
-					if (userValidator.contains("noValidationForThisUser"))
-						request.setAttribute("messageEmail",
-								"Pour valider votre compte, ouvrez votre email et cliquez sur le lien 'ici'<br />");
-
-					doGet(request, response);
-					return;
-				}
-			} catch (Exception e) {
-				e.getMessage();
-			}
-
-			try {
-				if (login.getLogin() != null) {
-
-					HttpSession session = request.getSession();
-
-					session.setAttribute("name", login.getLogin());
-					response.sendRedirect(request.getContextPath() + "/PageAcceuil"); // request.getContextPath()
-					return;
-
 				} else {
 					request.setAttribute("error", "1");
 					doGet(request, response);
@@ -142,8 +149,8 @@ public class Identification extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println("Login non trouv�");
 				e.printStackTrace();
+				doGet(request, response);
 			}
-
 //			request.setAttribute("title", UserDao.attributeTitle(""));
 //
 //			String idProduct = (String) request.getParameter("idProduct");
@@ -155,7 +162,6 @@ public class Identification extends HttpServlet {
 //			response.sendRedirect(request.getContextPath() + "/"); // request.getContextPath()
 			break;
 		default:
-
 			break;
 		}
 

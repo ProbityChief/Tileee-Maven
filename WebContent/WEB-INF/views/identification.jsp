@@ -55,6 +55,8 @@
         		<c:if test="${ !empty passError}">${passError}</c:if>
 	            <button id="submit" type="submit"><i class="fa fa-check" style="color: #1b5774; transition: color 0.25s" onmouseover="this.style.color='#dddddd'" onmouseout="this.style.color='#1b5774'"></i></button>
 			</form>
+				<c:if test="${userMessage ne null}">
+								${userMessage}</c:if>
 			</c:if>
 			<c:if test="${choix == 2}">
 	        <form method="post" action="?choix=2&validation=login" charset="utf-8" class="inner">

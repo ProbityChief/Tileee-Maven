@@ -14,10 +14,40 @@
 
 		<properties>
 			<!-- config jpa -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tileee" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:8889/tileee?serverTimezone=UTC" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.password" value="root" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+
+			<!-- config jpa -->
+			<!-- Valeurs possibles: validate : en production (valide le schéma de 
+				la bdd) update: met à jour le schéma de la base de données (à la rigueur 
+				en prod) create: crée le schéma, supprime toutes les données pré(existantes) 
+				create-drop: comme le create, mais supprime les tables à l'arret de l'application 
+				(pour les test éventuellement) -->
+
+			<!-- Pas en prod, create, create-drop -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+
+			<!-- faculatatif -->
+			<!-- Permet d'afficher les requetes dans la console -->
+			<property name="hibernate.show_sql" value="true" />
+			<!-- Permet de formatter sur plusieurs lignes les requetes dans la console -->
+			<property name="hibernate.format_sql" value="false" />
+		</properties>
+	</persistence-unit>
+	
+	<persistence-unit name="tileeetest"
+		transaction-type="RESOURCE_LOCAL">
+
+		<properties>
+			<!-- config jpa -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:8889/tileee?serverTimezone=UTC" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="root" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 
 			<!-- config jpa -->
 			<!-- Valeurs possibles: validate : en production (valide le schéma de 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,15 +10,30 @@
 <script type="text/javascript" src="/js/index.js"></script>
 </head>
 <body>
-<c:if test="${sessionScope.name != null}">
+<c:if test="${sessionScope.user.login != null}">
 	<section id="title">
 		<nav id="menu">
 			<ul>
-				<li><a class="fa fa-layer-group" href="Entrainement"></a></li>
-				<li><a class="fa fa-tag" href="CreationStacks"></a></li>
-				<li><a class="fa fa-user-friends" href="Invitation"></a></li>
-				<li><a href="Invitation"><img src="pictures/Groupe2.svg"></a></li>
-				<li><a class="fa fa-cog" href="Parametres"></a></li>
+				<li><a class="fa fa-layer-group" href="<%= request.getScheme() + "://"
+													+ request.getServerName() + ":"
+													+ request.getServerPort() +
+													request.getContextPath() +
+													"/Entrainement"%>"></a></li>
+				<li><a class="fa fa-tag" href="<%= request.getScheme() + "://"
+													+ request.getServerName() + ":"
+													+ request.getServerPort() +
+													request.getContextPath() +
+													"/CreationStacks"%>"></a></li>
+				<li><a class="fa fa-user-friends" href="<%= request.getScheme() + "://"
+													+ request.getServerName() + ":"
+													+ request.getServerPort() +
+													request.getContextPath() +
+													"/Invitation"%>"></a></li>
+				<li><a class="fa fa-cog" href="<%= request.getScheme() + "://"
+													+ request.getServerName() + ":"
+													+ request.getServerPort() +
+													request.getContextPath() +
+													"/Parametres"%>"></a></li>
 				<li><a class="fa fa-power-off" href="<%= request.getScheme() + "://"
 													+ request.getServerName() + ":"
 													+ request.getServerPort() +

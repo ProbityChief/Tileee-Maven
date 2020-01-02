@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<!-- Unité de persistence: configuration de votre BDD Vous pouvez avoir 
+		plusieurs persistence-unit nommés diffrement ssi vous avez plusieurs base 
+		de données -->
+	<!-- plusieurs persistence-unit peuvent être admise, en changeant par exemple 
+		la valeur d'une base de données, ou la base de données elle même. C'est utilie 
+		pour un environnement de développement, test ou prod -->
+	<persistence-unit name="tileee"
+		transaction-type="RESOURCE_LOCAL">
+
+		<properties>
+			<!-- config jpa -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tileee" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+
+			<!-- config jpa -->
+			<!-- Valeurs possibles: validate : en production (valide le schéma de 
+				la bdd) update: met à jour le schéma de la base de données (à la rigueur 
+				en prod) create: crée le schéma, supprime toutes les données pré(existantes) 
+				create-drop: comme le create, mais supprime les tables à l'arret de l'application 
+				(pour les test éventuellement) -->
+
+			<!-- Pas en prod, create, create-drop -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+
+			<!-- faculatatif -->
+			<!-- Permet d'afficher les requetes dans la console -->
+			<property name="hibernate.show_sql" value="true" />
+			<!-- Permet de formatter sur plusieurs lignes les requetes dans la console -->
+			<property name="hibernate.format_sql" value="false" />
+		</properties>
+	</persistence-unit>
+</persistence>

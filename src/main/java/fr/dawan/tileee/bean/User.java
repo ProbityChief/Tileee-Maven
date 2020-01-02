@@ -1,34 +1,40 @@
 package fr.dawan.tileee.bean;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "users")
 public class User extends DbObject {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long user_id;
 	private String login;
 	private String password;
 	private String mail;
-	private Date registrationdate;
+	private LocalDate registrationdate;
 	private boolean validation;
-	private String hashcode;
-	
-    public User(String login, String password, String mail) {
+	private String rand;
+
+	public User() {
 		super();
+	}
+    public User(String login, String mail, String password) {
+    	this();
+		this.login = login;
+		this.mail = mail;
+		this.password = password;
+		this.registrationdate = LocalDate.now();
+		this.validation = false;
+	}
+	public User(String login, String password) {
+		this();
 		this.login = login;
 		this.password = password;
-		this.mail = mail;
 	}
-	public long getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
-	}
+
 	public String getLogin() {
 		return login;
 	}
@@ -47,11 +53,8 @@ public class User extends DbObject {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	public Date getRegistrationdate() {
+	public LocalDate getRegistrationdate() {
 		return registrationdate;
-	}
-	public void setRegistrationdate(Date registrationdate) {
-		this.registrationdate = registrationdate;
 	}
 	public boolean isValidation() {
 		return validation;
@@ -59,10 +62,10 @@ public class User extends DbObject {
 	public void setValidation(boolean validation) {
 		this.validation = validation;
 	}
-	public String getHashcode() {
-		return hashcode;
+	public String getRand() {
+		return rand;
 	}
-	public void setHashcode(String hashcode) {
-		this.hashcode = hashcode;
+	public void setRand(String rand) {
+		this.rand = rand;
 	}
 }

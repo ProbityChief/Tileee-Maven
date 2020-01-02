@@ -13,6 +13,9 @@
 		<style type="text/css"><%@include file="css/index.css" %></style>
 	</head>
 	<body style=";">
+	<c:choose>
+	<c:when test="${sessionScope.user ne null}"><%@include file="header.jsp" %></c:when>
+	<c:otherwise>
 	<section id="title">
 		<nav id="menu">
 			<ul>
@@ -21,7 +24,8 @@
 			</ul>
 		</nav>
 	</section>
-	
+	</c:otherwise>
+	</c:choose>
 	<c:forEach items="${mot}" var="var">
 	    <input type="hidden" class="mot" value="${var}" />
 	</c:forEach>
