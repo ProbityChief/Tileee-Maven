@@ -12,37 +12,30 @@
 	<style><%@include file="css/index.css" %></style>
 </head>
 <body>
-<%@include file="header.jsp" %>
-
+	<section id="title">
+		<nav id="menu">
+			<ul>
+				<li id="quit" class="fa fa-reply" onclick="window.location.replace('PageAcceuil')" title="Retour"></li>
+			</ul>
+		</nav>
+	</section>
 	<div id="overall">
 		<article id="textbox">
-			<table>
-				<tr>
-					<td>
-						<form method="post" action="Parametres?action=modifpass">
-							<input type="text" placeholder="Saisissez votre nouveau mot de passe" name="newpass"><br /> 
-							<input type="text" placeholder="Confirmer votre nouveau mot de passe" name="confirmationnewpass">
-					</td>
-					<td><input type="submit" value="Modifier votre mot de passe"></td>
-				</tr>
-				<tr>
-					<td>
-						<form method="post" action="Parametres?action=modiftheme">
-							<select name="theme">
-								<option value="">Tileee</option>
-								<option value="transport">Flashcards</option>
-								<option value="maison">Le Bahaus</option>
-							</select>
-					<td><input type="submit" value="Modifier le thème">
-						</form></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<form method="post" action="Parametres?action=supprimercompte">
-  <input type="checkbox" name="supprimer"><label for="scales">Supprimer le compte (attention, une fois coché, il vous sera impossible de revenir en arrière)</label>
-	</form>
-				</tr>
-			</table>
+				<!-- form method="post" action="Parametres?action=modiftheme" class="inner">
+					<select name="theme" class="form-control">
+						<option value="">Tileee</option>
+						<option value="transport">Flashcards</option>
+						<option value="maison">Le Bahaus</option>
+					</select>
+					<input type="submit" value="Modifier le thème" class="form-control">
+				</form>
+				<hr/-->
+				<form method="get" action="" class="inner" style="padding: 30px; display: flex; justify-content: center; align-items: center">
+					 Mon Compte
+					<input type="submit" id="suppression" name="action" value="Supprimer" class="form-control" style="color: #ed4337; font-size: 1em; cursor: pointer;" disabled>
+					<input type="checkbox" class="checkbox" >
+					<input type="checkbox" id="test1" onclick="if(document.querySelector('#test1').checked === true) document.querySelector('#suppression').disabled = false; else document.querySelector('#suppression').disabled = true;"><label for="test1" aria-describedby="label"></label><br>
+				</form>
 		</article>
 	</div>
 

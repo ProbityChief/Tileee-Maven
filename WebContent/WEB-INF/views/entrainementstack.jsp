@@ -7,9 +7,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Tileee</title>
-		<script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/f64643ede5.js" crossorigin="anonymous"></script>
 	<script type="text/javascript"><%@include file="js/index.js" %></script>
-	<style><%@include file="css/index.css" %></style>
+	<style type="text/css"><%@include file="css/index.css" %></style>
 </head>
 <body>
 <%@include file="header.jsp" %>
