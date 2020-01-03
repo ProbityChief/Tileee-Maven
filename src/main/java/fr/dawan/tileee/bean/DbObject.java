@@ -7,12 +7,16 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class DbObject {
-	//Séquence: ligne de diférente table incrmente un champ en commun
+	//Sï¿½quence: ligne de difï¿½rente table incrmente un champ en commun
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	//Nom de attribut = nom des champs
 	private long id;
 	
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public long getId() {
 		return id;
 	}

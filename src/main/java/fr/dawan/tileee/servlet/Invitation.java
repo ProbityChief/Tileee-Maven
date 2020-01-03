@@ -3,6 +3,7 @@ package fr.dawan.tileee.servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import fr.dawan.tileee.bean.Tag;
 import fr.dawan.tileee.bean.User;
-import fr.dawan.tileee.dao.InvitationDAO;
 import fr.dawan.tileee.dao.TagsDAO;
 import fr.dawan.tileee.dao.UserDao;
 
@@ -50,8 +50,11 @@ public class Invitation extends HttpServlet {
 			User user = (User) session.getAttribute("user");
 			TagsDAO tagsdao = new TagsDAO("tileee");
 			Set<Tag> tagsList= tagsdao.findTags(user, true);
-			List<Tag> tagslist = new ArrayList<Tag>(tagsList);
-			request.setAttribute("lTag", tagslist);
+			Set<String> tags = new HashSet<String>();
+			for(Tag T : tagsList) {
+				tags.add(T.getTag_name());
+			}
+			request.setAttribute("lTag", tags);
 //		}
 		request.getRequestDispatcher("WEB-INF/views/invitation.jsp").forward(request, response);
 	}

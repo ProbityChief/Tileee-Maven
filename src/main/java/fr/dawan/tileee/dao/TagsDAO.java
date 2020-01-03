@@ -143,37 +143,42 @@ public class TagsDAO extends GenericDao<Tag>{
 		return result;
 	}
 	
-	public void CloneTags(String rand, User usertoget, boolean close)
+	public void CloneTags(String rand, User user, boolean close)
 	{   
-		CardDao carddao = new CardDao("tileeetest");
+		CardDao carddao = new CardDao("tileee");
 		List<Card> listCard = carddao.findByRand(rand, false);
 		
 		
 		Tag tag = new Tag();
-		TagsDAO tagsdao = new TagsDAO("tileeetest");
+		TagsDAO tagsdao = new TagsDAO("tileee");
 		Tag tag2 = tagsdao.findTagNameByRand(rand, false);
-		String tagaajouter = tag2.getTag_name();
-		tag.setTag_name(tagaajouter);
-		String rand2 = UserValidator.hash(usertoget.getLogin() + "_" + tagaajouter);
+		String tagaclone = tag2.getTag_name();
+		tag.setTag_name(tagaclone);
+		String rand2 = UserValidator.hash(user.getLogin() + "_" + tagaclone);
 		tag.setRand(rand2);
-
+		Set<Tag> tags = new HashSet<Tag>();
+		tags.add(tag);
+		tagsdao.insert(tag, false);
+		Card card = listCard.get(0);
 		for(Card c : listCard) {
+			c.setId(0);
+			c.setUser(user);
+			c.setTags(tags);
+			carddao.insert(c, false);
 			tag.addCard(c);
-			c.addTag(tag);
-			carddao.insert(c, true);
 		}	
 		
-		tagsdao.insert(tag, true);
-		
+		tagsdao.update(tag, true);
+		carddao.update(card, true);
 		if (close)
 			em.close();
 
 	}
 
 	public Tag findTagNameByRand(String rand, boolean b) {
-		
-		Tag tag = (Tag) em.createNativeQuery("SELECT * FROM tags WHERE rand = \"" + rand +"\"", Tag.class).getSingleResult();
-		
+		//A revoir
+		List<Tag> listTag = (List<Tag>) em.createNativeQuery("SELECT * FROM tags WHERE rand = \"" + rand +"\"", Tag.class).getResultList();
+		Tag tag = listTag.get(0);
 		if (b)
 			em.close();
 

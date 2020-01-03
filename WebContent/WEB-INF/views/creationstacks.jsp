@@ -33,14 +33,15 @@
 </select><br />
       <input type="text" placeholder="Entrer le mot à traduire" name="motinitial">
       <input type="text" placeholder="Entrer le mot traduit" name="mottraduit"><br />
-      Ajouter un nouveau tag ou sélectionner un ou plusieurs tags (5 maximums):
-            <input type="text" placeholder="Entrer un nouveau tag" name="tagaajouter"><br />
-      		<select name="tag" id="tag">
-      			<c:forEach items="${lTag}" var="lol">
-      			<option value="${lol}">${lol}</option>
-      			</c:forEach>
-      		</select>
-    
+<!--       Ajouter un nouveau tag ou sélectionner un ou plusieurs tags (5 maximums): -->
+<!--             <input type="text" placeholder="Entrer un nouveau tag" name="tagaajouter"><br /> -->
+<!--       		<select name="tag" id="tag"> -->
+<%--       			<c:forEach items="${lTag}" var="lol"> --%>
+<%--       			<option value="${lol}">${lol}</option> --%>
+<%--       			</c:forEach> --%>
+<!--       		</select> -->
+Entrer une stack existante ou une nouvelle stack:
+<input type="text" placeholder="Entrer le nom d'une stack existante ou non" name="tagaajouter"><br />
     <input type="submit" value="Envoyer carte">
 </form><p>
 		</article>

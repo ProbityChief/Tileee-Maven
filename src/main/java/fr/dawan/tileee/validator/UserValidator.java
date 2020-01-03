@@ -18,7 +18,6 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 
-import fr.dawan.tileee.bean.Invitation;
 import fr.dawan.tileee.bean.User;
 import fr.dawan.tileee.dao.GenericDao;
 import fr.dawan.tileee.dao.UserDao;

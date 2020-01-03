@@ -3,6 +3,7 @@ package fr.dawan.tileee.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -51,8 +52,11 @@ public class CreationStacks extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		TagsDAO tagsdao = new TagsDAO("tileee");
 		Set<Tag> tagsList= tagsdao.findTags(user, true);
-		List<Tag> tagslist = new ArrayList<Tag>(tagsList);
-		request.setAttribute("lTag", tagslist);
+		Set<String> tags = new HashSet<String>();
+		for(Tag T : tagsList) {
+			tags.add(T.getTag_name());
+		}
+		request.setAttribute("lTag", tags);
 		request.getRequestDispatcher("WEB-INF/views/creationstacks.jsp").forward(request,response);
 	}
 
@@ -80,27 +84,29 @@ public class CreationStacks extends HttpServlet {
 		TagsDAO tagdao = new TagsDAO("tileee");
 		CardDao carddao = new CardDao("tileee");
 		Tag tag = null;
-		if (tagaajouter != null && !tagdao.tagExist(tagaajouter, true)) {
+		if (tagaajouter != null && !tagdao.tagExist(tagaajouter, false)) {
 			tag = new Tag();
 			tag.setTag_name(tagaajouter);
 			String rand = UserValidator.hash(user.getLogin() + "_" + tagaajouter);
 			tag.setRand(rand);
-			tagdao.insert(tag, false);
-			tag.addCard(card);
-			tagdao.update(tag, false);
-		} else if (tagaajouter != null && tagdao.tagExist(tagaajouter, true)) {
-			tag = tagdao.findTagByTagname(tagaajouter, true);
+//			Set<Tag> tags = new HashSet<Tag>();
+//			tags.add(tag);
+//			card.setTags(tags);
+//			carddao.insert(card, true);
+			tagdao.insert(tag, true);
+			card.addTag(tag);
+			carddao.insert(card, true);
+//			tagdao.update(tag, true);
+			System.out.println(card.getId());
+//			carddao.update(card, true);
+			System.out.println(1);
+		} else if (tagaajouter != null && tagdao.tagExist(tagaajouter, false)) {
+			tag = tagdao.findTagByTagname(tagaajouter, false);
+			card.addTag(tag);
+			carddao.insert(card, true);
 		} else {
 			request.getRequestDispatcher("WEB-INF/views/creationstacks.jsp").forward(request,response);	
-		}
-
-		card.addTag(tag);
-		tag.addCard(card);
-		carddao.insert(card, true);
-		tagdao.update(tag, true);
-		
-
-			
+		}	
 		
 //		Tag tag1 = null;
 //		if (tagacompleter1 != null) {
